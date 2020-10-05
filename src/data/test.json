@@ -3,38 +3,60 @@
     "item": {
         "itemById":{
             "clothes": {
-                "itemsPurchased": [],
-                "itemsSaved": [],
-                "mostRecentSearches": []
+                "itemsPurchased": ["jumper"],
+                "itemsSaved": ["trousers"],
+                "mostRecentSearches": ["winter"],
+                "api": ""
+                
             },
             "holiday":{
-
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
             },
             "games": {
-
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
             },
             "films": {
-
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
             },
             "sports":{
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
 
             },
             "books":{
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
 
             },
             "music": {
-
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": [],
+                "api": ""
             }
         },
         "itemAllId":["clothes", "holiday", "games", "films", "sports", "books", "music"]
     },
     "money": {
         "moneyById": {
-                "monthlyIncome": 0,
-                "currentSpendingAlllowance": 0,
-                "highSpend" : 0,
-                "mediumSpend": 0,
-                "lowSpend": 0
+                "monthlyIncome": 11,
+                "currentSpendingAlllowance": 20,
+                "highSpend" : 30,
+                "mediumSpend": 40,
+                "lowSpend": 50
         },
         "moneyAllId":["monthlyIncome","currentSpendingAlllowance", "highSpend", "mediumSpend", "lowSpend"]        
     }

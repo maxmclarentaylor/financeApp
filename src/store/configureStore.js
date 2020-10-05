@@ -2,10 +2,10 @@ import { configureStore} from '@reduxjs/toolkit'
 import { rootReducer } from '../reducers/rootReducer'
 
 
-export default function createOurStore(data){
+export default function createOurStore(preloadedState){
     const store = configureStore({
         reducer: rootReducer,
-        preloadedState: data
+        preloadedState
     })
     return store
 }

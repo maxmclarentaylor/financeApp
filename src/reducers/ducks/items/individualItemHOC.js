@@ -16,10 +16,17 @@ export function removeItemBuyList(itemType, removeUpdate){
     }
 }
 
-export function removeItemBuyList(itemType, removeUpdate){
+export function updateNeedLevel(itemType, updateNeedLevel){
     return {
-        type: `${itemType}/removeItemFromBuyList`,
-        payload: removeUpdate
+        type: `${itemType}/updateNeedLevelOfItem`,
+        payload: updateNeedLevel
+    }
+}
+
+export function updateMostRecentSearch(itemType, updateSearchLevel){
+    return {
+        type: `${itemType}/updateMosRecentSearches`,
+        payload: updateSearchLevel
     }
 }
 
@@ -28,14 +35,15 @@ export function removeItemBuyList(itemType, removeUpdate){
 
 
 
-//HOC action creaters
-export const HOCItem = ({itemName}) => {
+//HOC reducer creaters
+export const HOCReducerItem = ({itemName}) => {
     const itemReducer = createSlice({
         name: itemName,
         initialState: {
             itemsPurchased : [],
             itemsSaved: [],
             mostRecentSearches: [],
+            api: ""
           },
         reducers: {
             updateItemsToBuy: (state) => {
@@ -44,7 +52,7 @@ export const HOCItem = ({itemName}) => {
             removeItemFromBuyList: (state) => {
 
             },
-            updateNeedLevelOfIem: (state) => {
+            updateNeedLevelOfItem: (state) => {
 
             },
             updateMosRecentSearches: (state) => {
@@ -53,4 +61,18 @@ export const HOCItem = ({itemName}) => {
         }
     })
 
+    return itemReducer.reducer
+
 }
+
+export const allIdsStore = createSlice({
+    name: "itemAllId",
+    initialState: [],
+    reducers: {
+        // this may never be used - more it is a place to store the ids we so can
+        // access them within the application
+        updateItemName: (state) => {
+
+        },
+    }
+})
