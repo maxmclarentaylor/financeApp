@@ -1,0 +1,40 @@
+
+{
+    "item": {
+        "itemById":{
+            "clothes": {
+
+            },
+            "holiday":{
+
+            },
+            "games": {
+
+            },
+            "films": {
+
+            },
+            "sports":{
+
+            },
+            "books":{
+
+            },
+            "music": {
+
+            }
+        },
+        "itemAllId":["clothes", "holiday", "games", "films", "sports", "books", "music"]
+    },
+    "money": {
+        "moneyById": {
+                "monthlyIncome": 0,
+                "currentSpendingAlllowance": 0,
+                "highSpend" : 0,
+                "mediumSpend": 0,
+                "lowSpend": 0
+        },
+        "moneyAllId":["monthlyIncome","currentSpendingAlllowance", "highSpend", "mediumSpend", "lowSpend"]        
+    }
+}
+
