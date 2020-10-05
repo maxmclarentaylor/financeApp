@@ -3,7 +3,9 @@
     "item": {
         "itemById":{
             "clothes": {
-
+                "itemsPurchased": [],
+                "itemsSaved": [],
+                "mostRecentSearches": []
             },
             "holiday":{
 
