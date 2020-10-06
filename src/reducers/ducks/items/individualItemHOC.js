@@ -40,7 +40,7 @@ export const HOFReducerItem = ({itemName}) => {
     const itemReducer = createSlice({
         name: itemName,
         initialState: {
-            itemsPurchased : [],
+            itemsPurchased : {},
             itemsSaved: [],
             mostRecentSearches: [],
             api: ""
@@ -65,6 +65,8 @@ export const HOFReducerItem = ({itemName}) => {
 
 }
 
+
+
 export const allIdsStore = createSlice({
     name: "itemAllId",
     initialState: [],
@@ -74,5 +76,23 @@ export const allIdsStore = createSlice({
         updateItemName: (state) => {
 
         },
+        removeItemFromKeys: (state, action) => {
+                state.forEach((array) => {
+                    if(array[0] === action.payload[0]){
+                        array[1] = action.payload[1]
+                    }
+                })
+                return state
+        },
+        addItemToKeys: (state, action) =>{
+            state.forEach((array) => {
+                if(array[0] === action.payload[0]){
+                    array[1] = action.payload[1]
+                }
+            })
+            return state
+        }
     }
 })
+
+export const { removeItemFromKeys, addItemToKeys } = allIdsStore.actions

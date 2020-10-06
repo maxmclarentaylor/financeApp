@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import App from './containers/App';
+import Overview from './containers/App';
 import { Provider } from 'react-redux'
 import createOurStore from './store/configureStore'
 import data from './data/test.json'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
 
 const store = createOurStore(data)
@@ -13,9 +18,15 @@ console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>
+    <Router>
   <React.StrictMode>
-    <App />
+    <Switch>
+        <Route path="/">
+             <Overview />
+        </Route>
+    </Switch>
   </React.StrictMode>
+  </Router>
   </Provider>,
   document.getElementById('root')
 );

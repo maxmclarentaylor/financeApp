@@ -3,23 +3,34 @@
     "item": {
         "itemById":{
             "clothes": {
-                "itemsPurchased": ["jumper"],
+                "itemsPurchased": [
+                    {"name": "jumper",
+                    "price": 10,
+                    "wantLevel": "strong"
+                    }
+                ],
                 "itemsSaved": ["trousers"],
                 "mostRecentSearches": ["winter"],
-                "api": ""
+                "api": "",
+                "selected": true
+                
                 
             },
             "holiday":{
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
+
             },
             "games": {
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
+
             },
             "films": {
                 "itemsPurchased": [],
@@ -31,24 +42,29 @@
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
+
 
             },
             "books":{
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
 
             },
             "music": {
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
+
             }
         },
-        "itemAllId":["clothes", "holiday", "games", "films", "sports", "books", "music"]
+        "itemAllId":[["clothes",true], ["holiday",true], ["games",true], ["films",true], ["sports",true], ["books",true], ["music",true]]
     },
     "money": {
         "moneyById": {
