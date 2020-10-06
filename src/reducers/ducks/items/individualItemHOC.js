@@ -36,7 +36,7 @@ export function updateMostRecentSearch(itemType, updateSearchLevel){
 
 
 //HOC reducer creaters
-export const HOCReducerItem = ({itemName}) => {
+export const HOFReducerItem = ({itemName}) => {
     const itemReducer = createSlice({
         name: itemName,
         initialState: {

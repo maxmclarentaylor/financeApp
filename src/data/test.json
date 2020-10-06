@@ -59,6 +59,36 @@
                 "lowSpend": 50
         },
         "moneyAllId":["monthlyIncome","currentSpendingAlllowance", "highSpend", "mediumSpend", "lowSpend"]        
-    }
+    },
+   "spendingPerMonth":{
+        "spendingMonthById":{
+            "Jan": [{"name": "jumper",
+                    "price": 20}],
+            "Feb": [],
+            "Mar": [],
+            "Apr": [],
+            "May": [],
+            "Jun": [],
+            "Jul": [],
+            "Aug": [],
+            "Sep": [],
+            "Oct": [],
+            "Nov": [],
+            "Dec": []
+        },
+        "spendingMonthAllId": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+   },
+   "goals": {
+       "goalsById": {
+
+       },
+       "goalsAllId": []
+   },
+   "conditions": {
+        "conditionsById": {
+
+        },
+        "conditionsAllIds": []
+   }
 }
 
