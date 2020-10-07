@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux'
 import { removeItemFromKeys } from '../reducers/ducks/items/individualItemHOC'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { removeItemBuyList } from '../reducers/ducks/items/individualItemHOC'
+import { removeItemBuyList, updateNeedLevel } from '../reducers/ducks/items/individualItemHOC'
 
 
 export const PurchasedItemListComponent = (props) => {
+
+    console.log(props)
 
      const dispatch = useDispatch()
      const wantLevel = ["High", "Medium", "Low"]
@@ -25,10 +27,12 @@ export const PurchasedItemListComponent = (props) => {
                     <p>Change want level of item</p>
                     <Dropdown options={wantLevel} onChange={(value) => {
                      const itemToSend = {
-                         "name": props.item[0],
-                         "price": props.item[1],
+                         "name": props.item.name,
+                         "price": props.item.price,
                          "wantLevel": value.value
                             }
+                            dispatch(updateNeedLevel(props.name, itemToSend))
+                            props.updateState()
                     }} value={""} />;
                 </div>
                 

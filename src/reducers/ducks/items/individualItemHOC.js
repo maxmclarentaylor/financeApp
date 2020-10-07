@@ -56,8 +56,13 @@ export const HOFReducerItem = ({itemName}) => {
                 state.itemsPurchased.splice(indexOfItemToRemove, 1)
                 return state
             },
-            updateNeedLevelOfItem: (state) => {
-
+            updateNeedLevelOfItem: (state, action) => {
+                state.itemsPurchased.map((item, index) => {
+                    if(item.name === action.payload.name){
+                        item.wantLevel = action.payload.wantLevel
+                    }
+                    })
+                return state
             },
             updateMosRecentSearches: (state) => {
 

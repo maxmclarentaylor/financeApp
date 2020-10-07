@@ -32,6 +32,7 @@ export const ItemListComponent = (props) => {
                          "wantLevel": value.value
                             }
                         dispatch(updateItemsToBuy(props.name, itemToSend))
+                        props.updateState()
                         updateItemChosen(false)
                     }} value={""} />;
                 </div>
