@@ -1,0 +1,28 @@
+{
+    "clothes":[
+        ["jumper", 10],
+        ["trousers", 20],
+        ["shorts", 35],
+        ["sunglasses", 50],
+        ["gym top", 30],
+        ["cycle helmet", 65],
+        ["socks", 35]
+    ],
+    "holiday": [
+        ["Thailand", 300],
+        ["New York", 250],
+        ["Australia", 400],
+        ["India", 400],
+        ["Japan", 250],
+        ["China", 450],
+        ["Greece", 200]
+    ],
+    "sports": [
+        ["football", 200],
+        ["Rugby", 320],
+        ["Polo", 220],
+        ["Tennis", 200],
+        ["Golf", 300],
+        ["Basketball", 220]
+    ]
+}

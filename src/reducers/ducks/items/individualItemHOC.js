@@ -30,11 +30,6 @@ export function updateMostRecentSearch(itemType, updateSearchLevel){
     }
 }
 
-
-
-
-
-
 //HOC reducer creaters
 export const HOFReducerItem = ({itemName}) => {
     const itemReducer = createSlice({
@@ -46,11 +41,20 @@ export const HOFReducerItem = ({itemName}) => {
             api: ""
           },
         reducers: {
-            updateItemsToBuy: (state) => {
+            updateItemsToBuy: (state, action) => {
+                    state.itemsPurchased.push(action.payload)
+                    return state
 
             },
-            removeItemFromBuyList: (state) => {
-
+            removeItemFromBuyList: (state, action) => {
+                var indexOfItemToRemove = ""
+                state.itemsPurchased.map((item, index) => {
+                        if(item.name === action.payload){
+                            indexOfItemToRemove = index
+                        }
+                })
+                state.itemsPurchased.splice(indexOfItemToRemove, 1)
+                return state
             },
             updateNeedLevelOfItem: (state) => {
 

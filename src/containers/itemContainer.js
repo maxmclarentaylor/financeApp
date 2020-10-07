@@ -14,34 +14,41 @@ export const ItemContainer = ( ) => {
     const items = useSelector(state => state.item.itemAllId)
     const dispatch = useDispatch()
     var arrayOfNames = []
-    console.log(arrayOfNames)
+    var help = "Bring Items back"
+    var arrayOfRoutes = []
 
     return(
+    <div className="parentClassItems">
        <div className="routeDisplay" >
-          {items.map((item) => {
-              
+          {items.map((item, index) => {
             const link = `/${item[0]}`
             if(item[1]){
+             arrayOfRoutes.push(<Route path={link} key={item[0] + "route"} render={(props) =>
+                    <ItemComponent  {...props} name={item[0]}/>
+            }/>)
             return(
             <div className="itemRoute" key={item[0]}>
                 <nav>
-                    <Link to={link}>{item[0]}</Link>
+                    <Link key={item[0] + "key"} to={link}>{item[0]}</Link>
                 </nav>
-                <div>
-                <Route path={link}  render={(props) =>
-                    <ItemComponent {...props} name={item[0]}/>
-                }/>
-                </div>
             </div>
                 )
             }  
             else{
-                arrayOfNames.push(item[0])
-            }   
+             arrayOfNames.push(item[0])
+             return ""
+            } 
+              
         })}
-        {arrayOfNames.length > 0 &&  <Dropdown options={arrayOfNames} onChange={(value) => {
+         {arrayOfNames.length > 0 &&  <Dropdown options={arrayOfNames} onChange={(value) => {
            dispatch(addItemToKeys([value.value, true]))
-       }} value={""} placeholder="Select an option" /> }
+       }} value={help}  /> }
+        </div>
+        <div>
+        {arrayOfRoutes.map((route, index) => {
+            return(route)
+        })}
+        </div>
      
     </div>
     )

@@ -6,7 +6,7 @@
                 "itemsPurchased": [
                     {"name": "jumper",
                     "price": 10,
-                    "wantLevel": "strong"
+                    "wantLevel": "High"
                     }
                 ],
                 "itemsSaved": ["trousers"],
@@ -36,7 +36,8 @@
                 "itemsPurchased": [],
                 "itemsSaved": [],
                 "mostRecentSearches": [],
-                "api": ""
+                "api": "",
+                "selected": true
             },
             "sports":{
                 "itemsPurchased": [],
@@ -64,7 +65,7 @@
 
             }
         },
-        "itemAllId":[["clothes",true], ["holiday",true], ["games",true], ["films",true], ["sports",true], ["books",true], ["music",true]]
+        "itemAllId":[["clothes",true], ["holiday",true], ["games",false], ["films",false], ["sports",true], ["books",false], ["music",false]]
     },
     "money": {
         "moneyById": {
