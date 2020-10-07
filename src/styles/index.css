@@ -68,3 +68,27 @@ code {
 .currentWantLevel{
   margin-left: 1rem;
 }
+
+.inputLength{
+  width: 20rem;
+  height: 3rem;
+}
+.inputLength2{
+  width: 5rem;
+  height: 3rem;
+}
+
+.inputLength3{
+  width: 10rem;
+  height: 3rem;
+}
+
+
+.goalCreator{
+display: flex;
+flex-direction: row;
+}
+
+.goalDiv{
+  margin-left: 2rem;
+}

@@ -4,10 +4,11 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import { ItemComponent } from '../components/itemComponent'
+import { ItemComponent } from '../components/ItemComponent'
 import { addItemToKeys } from '../reducers/ducks/items/individualItemHOC'
 import { styles } from '../styles/index.css'
 import Dropdown from 'react-dropdown';
+import { Progress } from './Progress'
 import 'react-dropdown/style.css';
 
 export const ItemContainer = ( ) => {
@@ -20,6 +21,12 @@ export const ItemContainer = ( ) => {
     return(
     <div className="parentClassItems">
        <div className="routeDisplay" >
+       <div className="itemRoute" key={"Progress"}>
+                <nav>
+                    <Link key={"ProgressLink"} to={'/progress'}>Progress</Link>
+                </nav>
+            </div>
+
           {items.map((item, index) => {
             const link = `/${item[0]}`
             if(item[1]){
@@ -45,6 +52,9 @@ export const ItemContainer = ( ) => {
        }} value={help}  /> }
         </div>
         <div>
+        <Route path="/Progress" key={"ProgressRoute"} render={(props) =>
+                    <Progress  {...props} />
+            }/>
         {arrayOfRoutes.map((route, index) => {
             return(route)
         })}

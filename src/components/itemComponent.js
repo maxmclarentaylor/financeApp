@@ -7,7 +7,6 @@ import data from '../data/mockItemData/mockData.json'
 
 export const ItemComponent = (props) => {
     const items = useSelector(state => state.item.itemById[props.name])
-    const [stateChange, makeTheStateChange] = useState("")
 
     const dispatch = useDispatch()
     const [over3, searchOverThree] = useState(false)
@@ -93,10 +92,16 @@ export const ItemComponent = (props) => {
             })
             hitAgainUpdate(false)
          }
+         else if(
+            items.itemsPurchased.length === 0
+         && hitAgain){
+            updateHighItems([])
+            updateLowItems([])
+            updateMediumItems([])
+            hitAgainUpdate(false)
+         }
     })
        
-
-
     useEffect(() => {
         if(search.length > 2 && over3){
             searchOverThree(false)

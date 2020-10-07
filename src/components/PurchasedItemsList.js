@@ -21,6 +21,7 @@ export const PurchasedItemListComponent = (props) => {
                 <div className="saveItem">Save</div>
                <div className="purchaseItem" onClick={() => {
                    dispatch(removeItemBuyList(props.name, props.item.name ))
+                   props.updateState()
                 }}>Remove Item</div>
                 <div className="currentWantLevel">{props.item.wantLevel}</div>
                <div className="wantLevel">
