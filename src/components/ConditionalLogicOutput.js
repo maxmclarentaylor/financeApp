@@ -1,16 +1,14 @@
-import React, { useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-
+import {  deleteGoal, updateGoalsSuccess } from '../reducers/ducks/goals/goals'
 
 
 export const ConditionalLogicOutput = (props) => {
 
-    console.log(props.id)
     var  goalObject  = useSelector((state) => state.goals.goalsById[props.id])
-
-    const arrayOfOptions = ["Higher", "Lower"]
+    const [key, updateKeys] = useState(props.id)
+    const dispatch  =  useDispatch()
     const [goalName, UpdateGoalName] = useState(goalObject.goalName)
     const [metricName, UpdateMetric] = useState(goalObject.metric)
     const [higherLower, UpdateHigherLower] = useState(goalObject.target)
@@ -21,7 +19,7 @@ export const ConditionalLogicOutput = (props) => {
 
     return(
         <div className="goalCreator">
-            <div>Your current goals</div>
+           <div>Goal Number {props.index}</div>
             <div>
                 <p>Name of goal</p>
             <input className="inputLength" type="text" placeholder="Name of Goal, e.g. miles run" onChange={(props) => {
@@ -73,6 +71,12 @@ export const ConditionalLogicOutput = (props) => {
                 }
             }
 
+            var successObjectToSend = {}
+
+            successObjectToSend["success"] = success
+            successObjectToSend["key"] = key
+
+            dispatch(updateGoalsSuccess( successObjectToSend))
             updatePass(success)
               UpdateuserAchievement(props.target.value)
             }} value={userAchievement}></input>
@@ -80,6 +84,12 @@ export const ConditionalLogicOutput = (props) => {
             <div className="goalDiv">
                 <p>Success</p>
                  <div>{pass}</div>
+            </div>
+            <div className="goalDiv">
+                <p onClick={() => {
+                    dispatch(deleteGoal(props.id))
+                }}>Remove goal</p>
+                
             </div>
         </div>
     )

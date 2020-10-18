@@ -6,6 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { addGoal } from '../reducers/ducks/goals/goals'
 
 export const ConditionalLogicCreator = (props) => {
+
+
 const arrayOfOptions = ["Higher", "Lower"]
 const [goalName, UpdateGoalName] = useState("")
 const [metricName, UpdateMetric] = useState("")
@@ -52,6 +54,7 @@ const dispatch = useDispatch()
                 objectToSend.target = higherLower
                 objectToSend.metric = metricName
                 objectToSend.amountToAchieve = amountToAchieve
+                objectToSend.goalNumber = props.number
                 if(goalName !== "" && higherLower !== "" && metricName !== "" && amountToAchieve !== "") {
                     dispatch(addGoal(objectToSend))
                     updateErrors(false)

@@ -69,11 +69,11 @@
     },
     "money": {
         "moneyById": {
-                "monthlyIncome": 11,
-                "currentSpendingAlllowance": 20,
-                "highSpend" : 30,
-                "mediumSpend": 40,
-                "lowSpend": 50
+                "monthlyIncome": 3000,
+                "currentSpendingAllowance": 3000,
+                "highSpend" : 0,
+                "mediumSpend": 0,
+                "lowSpend": 0
         },
         "moneyAllId":["monthlyIncome","currentSpendingAlllowance", "highSpend", "mediumSpend", "lowSpend"]        
     },
