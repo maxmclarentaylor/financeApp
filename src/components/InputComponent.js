@@ -30,7 +30,7 @@ export const InputComponent = (props) => {
             }
             console.log(e.target.value)
         }}></input>
-        {!goalsExist && <div>Value does not exist</div>}
+        {!goalsExist && <div>Value does not exist (look at your Goal Numbers)</div>}
         </div>
     )
 
