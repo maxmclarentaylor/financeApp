@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 
 export const InputComponent = (props) => {
 
+
+
     const [goalsExist, changeGoalExists] = useState(true)
 
     return(

@@ -47,7 +47,7 @@ export const ConditionalLogicOutput = (props) => {
                 var success = ""
 
                 if(props.target.value === ""){
-
+                    success = "incomplete"
                 }
                 else{
                     const inputNumber = parseInt(props.target.value)

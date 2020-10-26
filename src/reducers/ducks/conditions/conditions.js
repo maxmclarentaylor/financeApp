@@ -6,13 +6,11 @@ export const updateConditions = createSlice({
 
     },
     reducers: {
-        addConditional: () => {
-
+        addConditional: (state, action) => {
+           state[action.payload.key] = action.payload.value
+            return state
         },
         updateConditional: () => {
-
-        },
-        deleteConditional: () => {
 
         },
     }
@@ -24,11 +22,21 @@ export const updateConditionsId = createSlice({
 
     },
     reducers: {
-        addConditional: () => {
+        addConditionalId: (state, action) => {
+
+            state.push(action.payload)
+
+            return state
 
         },
-        deleteConditional: () => {
+        deleteConditionalId: () => {
             
         }
     }
 })
+
+export const { addConditional } = updateConditions.actions
+
+
+export const { addConditionalId } = updateConditionsId.actions
+

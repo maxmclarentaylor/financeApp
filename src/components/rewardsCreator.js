@@ -1,6 +1,8 @@
 import React, { useState,  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { InputComponent } from './InputComponent'
+import { v4 as uuidv4 } from 'uuid';
+import { addConditional, addConditionalId} from '../reducers/ducks/conditions/conditions'
 
 
 export const RewardsConditional = (props) => {
@@ -24,11 +26,10 @@ export const RewardsConditional = (props) => {
            updateArray(currentArray)
    }, [state])
 
-
+   const dispatch = useDispatch()
 
     return(
         <div className="customGoalContainer">
-            {console.log(inputDecisions)}
             {inputValues.map((value, index) => {
                 return <InputComponent currentValues={inputDecisions} update={addInputDecisions} value={value} goals={arrayOfNames} key={index + "inputComponent"}/>
             })}
@@ -42,11 +43,30 @@ export const RewardsConditional = (props) => {
             }}>-</div>}
                 {inputValues.length > 0 && 
                 <div className="equalsClass">
-                    <div>=</div>
+                    <div>= £</div>
                     <input onChange={(e) => {
                     RewardValueUpdate(e.target.value)
                     }}></input>
-                    <div>Save value</div>
+                    <div onClick={() => {
+
+                        const uuid = uuidv4()
+                        var array = []
+                        arrayOfNames.forEach((value,index) => {
+                            array.push(value[0])
+                        })
+                        array.push(rewardValue)
+                        
+                        var objectToSend = {}
+
+                        objectToSend.key = uuid
+                        objectToSend.value = array
+                    
+                        dispatch(addConditionalId(uuid))
+                        dispatch(addConditional(objectToSend))
+
+                        
+
+                    }} >Save value</div>
                 </div>}
         </div>
     )
