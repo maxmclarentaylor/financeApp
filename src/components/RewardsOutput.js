@@ -1,14 +1,28 @@
 import React, { useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { deleteConditionalId } from '../reducers/ducks/conditions/conditions'
 
 export const RewardsOutput = () => {
 
     var goalsObject  = useSelector((state) => state.goals)
     var conditionalsObject = useSelector((state) => state.conditions.conditionsById)
+    var conditionalsObjectId = useSelector((state) => state.conditions.conditionsAllIds)
     const [goalsResults, updateGoalResults] = useState([])
-
+    const dispatch = useDispatch()
    useEffect(() => {
+
+    updateGoalResults([])
     var arrayOfGoalOutputs = []
+    var idsToBeRemoved = []
+
+    conditionalsObjectId.map((value, index) => {
+        console.log("1")
+            if(!conditionalsObject[value]){
+                console.log("2")
+                idsToBeRemoved.push(value)
+            }
+    })
+
 
         for(const property in conditionalsObject){
             var conditionalArray = []
@@ -43,8 +57,11 @@ export const RewardsOutput = () => {
             arrayOfGoalOutputs.push(conditionalArray)
         }
         updateGoalResults(arrayOfGoalOutputs)
+        if(idsToBeRemoved.length > 0){
+        dispatch(deleteConditionalId(idsToBeRemoved))
+        }
 
-   },[goalsObject,conditionalsObject])
+   },[goalsObject,conditionalsObject, conditionalsObjectId])
 
 
    return(

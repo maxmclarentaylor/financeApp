@@ -13,6 +13,20 @@ export const updateConditions = createSlice({
         updateConditional: () => {
 
         },
+        removeConditional1: (state, action) => {
+            for(const property in state){
+                    var remove = false
+                    state[property].map((value, index) => {
+                        if(value === action.payload){
+                            remove = true
+                        }
+                    })
+                    if(remove){
+                        delete state[property]
+                    }
+            }
+                return state
+        }
     }
 })
 
@@ -29,14 +43,21 @@ export const updateConditionsId = createSlice({
             return state
 
         },
-        deleteConditionalId: () => {
-            
+        deleteConditionalId: (state, action) => {
+            action.payload.forEach((idValue, index) => {
+                state.map((value, index) => {
+                    if(value === idValue){
+                        state.splice(index, 1)
+                    }
+                })
+            }) 
+            return state
         }
     }
 })
 
-export const { addConditional } = updateConditions.actions
+export const { addConditional, removeConditional1 } = updateConditions.actions
 
 
-export const { addConditionalId } = updateConditionsId.actions
+export const { addConditionalId, deleteConditionalId } = updateConditionsId.actions
 

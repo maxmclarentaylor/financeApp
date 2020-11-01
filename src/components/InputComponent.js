@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 
 export const InputComponent = (props) => {
 
-
-
     const [goalsExist, changeGoalExists] = useState(true)
 
     return(
@@ -15,7 +13,6 @@ export const InputComponent = (props) => {
                 return 
             }
             var exists = false
-            console.log(props.goals)
             props.goals.map((value, index) => {
                 console.log(value)
                 if(value[1] === parseInt(e.target.value)){

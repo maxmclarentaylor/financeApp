@@ -29,6 +29,9 @@ export const updateGoals = createSlice({
                     if(action.payload.success === "passed"){
                         success = true
                     }
+                    else if(action.payload.success === "incomplete"){
+                        success = "incomplete"
+                    }
                     else{
                         success = false
                     }

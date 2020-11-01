@@ -51,9 +51,16 @@ export const RewardsConditional = (props) => {
 
                         const uuid = uuidv4()
                         var array = []
-                        arrayOfNames.forEach((value,index) => {
-                            array.push(value[0])
+
+                        inputDecisions.forEach((value1,index) => {
+                            arrayOfNames.forEach((value2,index) => {
+                                console.log(value1)
+                                console.log(value2)
+                                if(parseInt(value1) === value2[1])
+                                array.push(value2[0])
+                            })
                         })
+                      
                         array.push(rewardValue)
                         
                         var objectToSend = {}
@@ -64,6 +71,8 @@ export const RewardsConditional = (props) => {
                         dispatch(addConditionalId(uuid))
                         dispatch(addConditional(objectToSend))
 
+                        addInputValue([])
+                        addInputDecisions([])
                         
 
                     }} >Save value</div>
