@@ -1,6 +1,9 @@
 import React, { useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteConditionalId } from '../reducers/ducks/conditions/conditions'
+import { deleteConditionalId, removeConditional2 } from '../reducers/ducks/conditions/conditions'
+import { increaseSpendingAllowance } from '../reducers/ducks/money/updateMoney'
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const RewardsOutput = () => {
 
@@ -8,6 +11,7 @@ export const RewardsOutput = () => {
     var conditionalsObject = useSelector((state) => state.conditions.conditionsById)
     var conditionalsObjectId = useSelector((state) => state.conditions.conditionsAllIds)
     const [goalsResults, updateGoalResults] = useState([])
+    const [numberToSend, updateNumberToSend] = useState([])
     const dispatch = useDispatch()
    useEffect(() => {
 
@@ -16,16 +20,13 @@ export const RewardsOutput = () => {
     var idsToBeRemoved = []
 
     conditionalsObjectId.map((value, index) => {
-        console.log("1")
             if(!conditionalsObject[value]){
-                console.log("2")
                 idsToBeRemoved.push(value)
             }
     })
-
-
         for(const property in conditionalsObject){
             var conditionalArray = []
+           
            const goalArray = conditionalsObject[property]
             var success = true
             var incomplete = false
@@ -34,11 +35,11 @@ export const RewardsOutput = () => {
                 conditionalArray.push(value)
                }
                else{
-                conditionalArray.push(goalsObject.goalsById[value].goalName)
-                if(goalsObject.goalsById[value].success === "incomplete"){
+                conditionalArray.push([goalsObject.goalsById[value[0]].goalName, value[1]])
+                if(goalsObject.goalsById[value[0]].success === "incomplete"){
                     incomplete = true
                 }
-                else if(goalsObject.goalsById[value].success === false){
+                else if(goalsObject.goalsById[value[0]].success === false){
                     success = false
                 }
                }
@@ -47,6 +48,7 @@ export const RewardsOutput = () => {
             conditionalArray.push("incomplete")
            }
            else{
+               
            if(success){
             conditionalArray.push(true)
            }
@@ -54,6 +56,7 @@ export const RewardsOutput = () => {
             conditionalArray.push(false)
            }
             }
+            conditionalArray.push(property)
             arrayOfGoalOutputs.push(conditionalArray)
         }
         updateGoalResults(arrayOfGoalOutputs)
@@ -63,11 +66,51 @@ export const RewardsOutput = () => {
 
    },[goalsObject,conditionalsObject, conditionalsObjectId])
 
-
    return(
     <div>
     <div>FJHDSFLJBFJLHSBAF</div>
+    {goalsResults.map((value, index) => {
+      return <div className="goalsResultsContainer" key={value[value.length - 1]}>
+            {value.map((condValues, index) => {
+                if(typeof condValues[0] === "number"){
+                    return <div key={condValues[1]}> {"=" + " " + condValues[0].toString()}</div>
+                }
+                else if(condValues === true || condValues === false || condValues === "incomplete"){
+                    if(condValues){
+                        dispatch(increaseSpendingAllowance(value[index - 1]))
+                    }
+                    var valueString = ""
+                    if(condValues){
+                        valueString = "pass"
+                    }
+                    else if(condValues == "incomplete"){
+                        valueString = "incomplete" 
+                    }
+                    else{
+                        valueString = "fail"
+                    }
+                    return <div key={valueString + value[index - 1][1]}>{valueString}</div>
+                }
+                else if(index === (value.length - 1)){
+                    return <div 
+                    key={condValues}
+                    onClick={
+                        () => {
+                            dispatch(deleteConditionalId([condValues]))
+                            dispatch(removeConditional2(condValues))
+                        }
+                    }
+                    >Remove Condition</div>
+                }
+                else{
+                    return <div key={condValues[1]}>{condValues[0]}</div>
+                }
+            })}
+
+        </div>
+    })}
    <div>{console.log(goalsResults)}</div>
    </div>
    )
 }
+

@@ -70,7 +70,7 @@
     "money": {
         "moneyById": {
                 "monthlyIncome": 3000,
-                "currentSpendingAllowance": 3000,
+                "currentSpendingAllowance": 30,
                 "highSpend" : 0,
                 "mediumSpend": 0,
                 "lowSpend": 0

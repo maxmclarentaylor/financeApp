@@ -26,7 +26,11 @@ export const updateConditions = createSlice({
                     }
             }
                 return state
-        }
+        },
+        removeConditional2: (state, action) => {
+                delete state[action.payload]
+                return state
+        }   
     }
 })
 
@@ -56,7 +60,7 @@ export const updateConditionsId = createSlice({
     }
 })
 
-export const { addConditional, removeConditional1 } = updateConditions.actions
+export const { addConditional, removeConditional1, removeConditional2 } = updateConditions.actions
 
 
 export const { addConditionalId, deleteConditionalId } = updateConditionsId.actions

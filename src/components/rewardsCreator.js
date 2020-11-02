@@ -54,14 +54,12 @@ export const RewardsConditional = (props) => {
 
                         inputDecisions.forEach((value1,index) => {
                             arrayOfNames.forEach((value2,index) => {
-                                console.log(value1)
-                                console.log(value2)
                                 if(parseInt(value1) === value2[1])
-                                array.push(value2[0])
+                                array.push([value2[0], uuidv4()])
                             })
                         })
                       
-                        array.push(rewardValue)
+                        array.push([parseInt(rewardValue), uuidv4()])
                         
                         var objectToSend = {}
 

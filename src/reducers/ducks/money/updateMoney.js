@@ -5,7 +5,7 @@ export const moneyUpdateReducer = createSlice({
     name: "money",
     initialState: {
         monthlyIncome: 0,
-        currentSpendingAlllowance: 0,
+        currentSpendingAllowance: 0,
         highSpend : 0,
         mediumSpend: 0,
         lowSpend: 0
@@ -16,6 +16,14 @@ export const moneyUpdateReducer = createSlice({
         updateItemName: (state) => {
 
         },
+        increaseSpendingAllowance: (state, action) => {
+           if(state["currentSpendingAllowance"] < action.payload){
+            state["currentSpendingAllowance"] = action.payload;
+           }
+
+           return state
+
+        }
     }
 })
 
@@ -31,3 +39,5 @@ export const moneyAllIdStore = createSlice({
         },
     }
 })
+
+export const { increaseSpendingAllowance } = moneyUpdateReducer.actions
