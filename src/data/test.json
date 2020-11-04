@@ -4,10 +4,6 @@
         "itemById":{
             "clothes": {
                 "itemsPurchased": [
-                    {"name": "jumper",
-                    "price": 10,
-                    "wantLevel": "High"
-                    }
                 ],
                 "itemsSaved": ["trousers"],
                 "mostRecentSearches": ["winter"],

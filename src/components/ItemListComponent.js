@@ -4,6 +4,9 @@ import { removeItemFromKeys } from '../reducers/ducks/items/individualItemHOC'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { updateItemsToBuy } from '../reducers/ducks/items/individualItemHOC'
+import { highSpend, mediumSpend, lowSpend } from '../reducers/ducks/money/updateMoney'
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const ItemListComponent = (props) => {
 
@@ -16,7 +19,6 @@ export const ItemListComponent = (props) => {
         <div className="listDisplay">
                 <div className="listDisplayItem">{props.item[0]}</div>
                 <div className="listDisplayPrice">£{props.item[1]}</div>
-                <div className="saveItem">Save</div>
                 {!itemChosen && <div className="purchaseItem" onClick={() => {
                     updateItemChosen(true)
                 }}>Add to Purchase list</div>}
@@ -29,8 +31,11 @@ export const ItemListComponent = (props) => {
                      const itemToSend = {
                          "name": props.item[0],
                          "price": props.item[1],
-                         "wantLevel": value.value
+                         "wantLevel": value.value,
+                         "key": uuidv4()
                             }
+                        
+
                         dispatch(updateItemsToBuy(props.name, itemToSend))
                         props.updateState()
                         updateItemChosen(false)

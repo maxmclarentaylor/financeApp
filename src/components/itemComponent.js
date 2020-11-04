@@ -19,76 +19,26 @@ export const ItemComponent = (props) => {
     const[lowItems, updateLowItems] = useState([])
 
     useEffect(() =>{
+        highItems.splice(0,highItems.length)
+        mediumItems.splice(0, mediumItems.length)
+        lowItems.splice(0, lowItems.length)
         if(items.itemsPurchased.length > 0 && hitAgain){
             items.itemsPurchased.map((specificItem, index) => {
-                if(specificItem.wantLevel === "High"){
-                    mediumItems.map((itemMediumArray,index) => {
-                        if(itemMediumArray.name === specificItem.name){
-                            mediumItems.splice(index,1)
-                        }
-                    })
-                    lowItems.map((lowArray,index) => {
-                        if(lowArray.name === specificItem.name){
-                            lowItems.splice(index,1)
-                        }
-                    })
-                     highItems.map((highArray,index) => {
-                        if(highArray.name === specificItem.name){
-                            highItems.splice(index,1)
-                        }
-                    })
-
-                    var newArrayHigh = highItems
+                 if(specificItem.wantLevel === "High"){
+                  var newArrayHigh = highItems
                     newArrayHigh.push(specificItem)
                     updateHighItems(newArrayHigh)
-                }
-                else if(specificItem.wantLevel === "Medium"){
-                    lowItems.map((lowArray,index) => {
-                        if(lowArray.name === specificItem.name){
-                            lowItems.splice(index,1)
-                        }
-                    })
-
-                    highItems.map((highArray,index) => {
-                        if(highArray.name === specificItem.name){
-                            highItems.splice(index,1)
-                        }
-                    })
-
-                    mediumItems.map((itemMediumArray,index) => {
-                        if(itemMediumArray.name === specificItem.name){
-                            mediumItems.splice(index,1)
-                        }
-                    })
-
-
-                    var newArrayMedium = mediumItems
+            }
+            else if(specificItem.wantLevel === "Medium"){
+                var newArrayMedium = mediumItems
                     newArrayMedium.push(specificItem)
                      updateMediumItems(newArrayMedium)
-                }
-                else{
-                    mediumItems.map((itemMediumArray,index) => {
-                        if(itemMediumArray.name === specificItem.name){
-                            mediumItems.splice(index,1)
-                        }
-                    })
-
-                    highItems.map((highArray,index) => {
-                        if(highArray.name === specificItem.name){
-                            highItems.splice(index,1)
-                        }
-                    })
-
-                    lowItems.map((lowArray,index) => {
-                        if(lowArray.name === specificItem.name){
-                            lowItems.splice(index,1)
-                        }
-                    })
-
-                    var newArrayLow = lowItems
+            }
+            else{
+                var newArrayLow = lowItems
                     newArrayLow.push(specificItem)
                     updateLowItems(newArrayLow)
-                }
+            }
             })
             hitAgainUpdate(false)
          }
@@ -122,18 +72,18 @@ export const ItemComponent = (props) => {
         }}>remove</div>
         <div>{props.name}</div>
         {highItems.length > 0 && highItems.map((individualItem,index) => {
-        return <PurchasedItemListComponent key={props.name + "purchased" + index} index={index} item={individualItem} name={props.name} updateState={() => {
+        return <PurchasedItemListComponent key={individualItem.key} index={index} item={individualItem} name={props.name} updateState={() => {
             hitAgainUpdate(true)
         }}/>
         })
         }
          {mediumItems.length > 0 && mediumItems.map((individualItem,index) => {
-        return <PurchasedItemListComponent key={props.name + "purchased" + index} index={index} item={individualItem} name={props.name} updateState={() => {
+        return <PurchasedItemListComponent key={individualItem.key} index={index} item={individualItem} name={props.name} updateState={() => {
             hitAgainUpdate(true)}}/>
         })
         }
          {lowItems.length > 0 && lowItems.map((individualItem,index) => {
-        return <PurchasedItemListComponent key={props.name + "purchased" + index} index={index} item={individualItem} name={props.name} updateState={() => {
+        return <PurchasedItemListComponent key={individualItem.key} index={index} item={individualItem} name={props.name} updateState={() => {
             hitAgainUpdate(true)}}/>
         })
         }

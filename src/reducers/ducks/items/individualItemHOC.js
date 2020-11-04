@@ -49,7 +49,7 @@ export const HOFReducerItem = ({itemName}) => {
             removeItemFromBuyList: (state, action) => {
                 var indexOfItemToRemove = ""
                 state.itemsPurchased.map((item, index) => {
-                        if(item.name === action.payload){
+                        if(item.key === action.payload){
                             indexOfItemToRemove = index
                         }
                 })
@@ -58,7 +58,7 @@ export const HOFReducerItem = ({itemName}) => {
             },
             updateNeedLevelOfItem: (state, action) => {
                 state.itemsPurchased.map((item, index) => {
-                    if(item.name === action.payload.name){
+                    if(item.key === action.payload.key){
                         item.wantLevel = action.payload.wantLevel
                     }
                     })

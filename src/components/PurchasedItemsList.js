@@ -18,9 +18,8 @@ export const PurchasedItemListComponent = (props) => {
         <div className="listDisplay">
                 <div className="listDisplayItem">{props.item.name}</div>
                 <div className="listDisplayPrice">£{props.item.price}</div>
-                <div className="saveItem">Save</div>
                <div className="purchaseItem" onClick={() => {
-                   dispatch(removeItemBuyList(props.name, props.item.name ))
+                   dispatch(removeItemBuyList(props.name, props.item.key ))
                    props.updateState()
                 }}>Remove Item</div>
                 <div className="currentWantLevel">{props.item.wantLevel}</div>
@@ -30,7 +29,8 @@ export const PurchasedItemListComponent = (props) => {
                      const itemToSend = {
                          "name": props.item.name,
                          "price": props.item.price,
-                         "wantLevel": value.value
+                         "wantLevel": value.value,
+                         "key": props.item.key
                             }
                             dispatch(updateNeedLevel(props.name, itemToSend))
                             props.updateState()
