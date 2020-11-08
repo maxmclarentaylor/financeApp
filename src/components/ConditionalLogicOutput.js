@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import 'react-dropdown/style.css';
 import {  deleteGoal, updateGoalsSuccess } from '../reducers/ducks/goals/goals'
 import {  removeConditional1 } from '../reducers/ducks/conditions/conditions'
+import { conditionalsSuccess } from '../functions/conditionalsSuccess'
 
 
 export const ConditionalLogicOutput = (props) => {
@@ -45,40 +46,17 @@ export const ConditionalLogicOutput = (props) => {
             <div className="goalDiv">
                 <p>Your result</p>
             <input className="inputLength3" type="number" placeholder="Amount to achieve" onChange={(props) => {
-                var success = ""
+            var success = ""
 
-                if(props.target.value === ""){
-                    success = "incomplete"
-                }
-                else{
-                    const inputNumber = parseInt(props.target.value)
-
-                if(higherLower === "Higher"){
-                    console.log(typeof amountToAchieve)
-                    if(inputNumber > amountToAchieve){
-                        success = 'passed'
-                    }
-                    else{
-                        success = "failed"
-                    }
-                }
-                else{
-                    if(inputNumber < amountToAchieve){
-                        success = "passed"
-                    }
-                    else{
-                        success = "failed"
-                    }
-                }
-            }
+            const valueReturn = conditionalsSuccess(props.target.value, higherLower, amountToAchieve, success)
 
             var successObjectToSend = {}
 
-            successObjectToSend["success"] = success
+            successObjectToSend["success"] = valueReturn
             successObjectToSend["key"] = key
 
-            dispatch(updateGoalsSuccess( successObjectToSend))
-            updatePass(success)
+            dispatch(updateGoalsSuccess(successObjectToSend))
+            updatePass(valueReturn)
               UpdateuserAchievement(props.target.value)
             }} value={userAchievement}></input>
             </div>
