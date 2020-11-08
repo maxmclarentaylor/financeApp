@@ -32,7 +32,7 @@ export const ItemComponent = (props) => {
             else if(specificItem.wantLevel === "Medium"){
                 var newArrayMedium = mediumItems
                     newArrayMedium.push(specificItem)
-                     updateMediumItems(newArrayMedium)
+                    updateMediumItems(newArrayMedium)
             }
             else{
                 var newArrayLow = lowItems

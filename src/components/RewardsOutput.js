@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { deleteConditionalId, removeConditional2 } from '../reducers/ducks/conditions/conditions'
 import { increaseSpendingAllowance } from '../reducers/ducks/money/updateMoney'
 import { v4 as uuidv4 } from 'uuid';
+import { rewardsTester } from '../functions/rewardsTester'
 
 
 export const RewardsOutput = () => {
@@ -44,18 +45,8 @@ export const RewardsOutput = () => {
                 }
                }
            })
-           if(incomplete){
-            conditionalArray.push("incomplete")
-           }
-           else{
-               
-           if(success){
-            conditionalArray.push(true)
-           }
-           else{
-            conditionalArray.push(false)
-           }
-            }
+
+           rewardsTester(incomplete,success,conditionalArray)
             conditionalArray.push(property)
             arrayOfGoalOutputs.push(conditionalArray)
         }
@@ -80,10 +71,10 @@ export const RewardsOutput = () => {
                         dispatch(increaseSpendingAllowance(value[index - 1]))
                     }
                     var valueString = ""
-                    if(condValues){
+                    if(condValues === true){
                         valueString = "pass"
                     }
-                    else if(condValues == "incomplete"){
+                    else if(condValues === "incomplete"){
                         valueString = "incomplete" 
                     }
                     else{

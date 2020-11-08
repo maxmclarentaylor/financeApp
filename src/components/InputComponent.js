@@ -9,6 +9,10 @@ export const InputComponent = (props) => {
         <input
         onChange={(e) => {
             if(e.target.value === ""){
+                console.log(props.currentValues)
+                var newArray = props.currentValues.slice(0,props.currentValues.length - 1)
+                console.log(newArray)
+                props.update(newArray)
                 changeGoalExists(true)
                 return 
             }
@@ -27,7 +31,6 @@ export const InputComponent = (props) => {
             else{
                 changeGoalExists(false)
             }
-            console.log(e.target.value)
         }}></input>
         {!goalsExist && <div>Value does not exist (look at your Goal Numbers)</div>}
         </div>
