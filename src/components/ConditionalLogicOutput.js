@@ -20,30 +20,15 @@ export const ConditionalLogicOutput = (props) => {
 
 
     return(
-        <div className="goalCreator">
-           <div>Goal Number {props.index}</div>
-            <div>
-                <p>Name of goal</p>
-            <input className="inputLength" type="text" placeholder="Name of Goal, e.g. miles run" onChange={(props) => {
-            }} value={goalName}></input>
+        <div className="goalCreatorYes">
+           <div className="goalDiv2">{props.index}.</div>
+            <div className="goalDiv2">
+                <p>Name of goal: {goalName}, </p>
             </div>
-            <div className="goalDiv">
-                 <p>{higherLower} than:</p>
+            <div className="goalDiv2">
+    <p>{higherLower} than: {amountToAchieve} {metricName}</p>
             </div>
-            <div className="goalDiv">
-                <p>Amount to achieve</p>
-            <input className="inputLength2" type="number" placeholder="Amount to achieve" onChange={(props) => {
-                const number = parseInt(props.target.value)
-
-              
-            }} value={amountToAchieve}></input>
-            </div>
-            <div className="goalDiv">
-                <p>Metric</p>
-            <input className="inputLength3" type="text" placeholder="Metric type" onChange={(props) => {
-            }} value={metricName}></input>
-            </div>
-            <div className="goalDiv">
+            <div className="goalDiv2">
                 <p>Your result</p>
             <input className="inputLength3" type="number" placeholder="Amount to achieve" onChange={(props) => {
             var success = ""
@@ -60,11 +45,11 @@ export const ConditionalLogicOutput = (props) => {
               UpdateuserAchievement(props.target.value)
             }} value={userAchievement}></input>
             </div>
-            <div className="goalDiv">
+            <div className="goalDiv2">
                 <p>Success</p>
                  <div>{pass}</div>
             </div>
-            <div className="goalDiv">
+            <div className="goalDiv2">
                 <p onClick={() => {
                     dispatch(removeConditional1(props.id))
                     dispatch(deleteGoal(props.id))

@@ -14,7 +14,7 @@ import {
 
 const store = createOurStore(data)
 
-console.log(store.getState())
+
 
 ReactDOM.render(
   <Provider store={store}>

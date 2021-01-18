@@ -19,7 +19,8 @@ const dispatch = useDispatch()
 
     return(
         <div className="goalCreator">
-            <div>Create your goal</div>
+            <div className="createYourGoal">Create your goal</div>
+            <div className="theActualGoal">
             <div>
                 <p>Name of goal</p>
             <input className="inputLength" type="text" placeholder="Name of Goal, e.g. Running" onChange={(props) => {
@@ -28,7 +29,7 @@ const dispatch = useDispatch()
             </div>
             <div className="goalDiv">
                 <p>Higher or lower</p>
-            <Dropdown options={arrayOfOptions} onChange={(value) => {
+            <Dropdown options={arrayOfOptions} className="dropDownOption" onChange={(value) => {
                 UpdateHigherLower(value.value)
             }} value={""}  />
             </div>
@@ -71,6 +72,7 @@ const dispatch = useDispatch()
 
             }}>Save goal</p>
             {errors && <div>You must fill out all options before you send</div>}
+            </div>
             </div>
         </div>
     )

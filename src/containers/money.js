@@ -6,14 +6,33 @@ export const MoneyContainer = () => {
     var  moneyObject  = useSelector((state) => state.money.moneyById)
 
     return(
-    <div>
-    <div>"Money"</div>
-    <div>Current Monthly Income: {moneyObject.monthlyIncome}</div>
-    <div>Current Spending Allowance: {moneyObject.currentSpendingAllowance}</div>
-    <div>Costs of items which are "High" in want levels: {moneyObject.highSpend}</div>
-    <div>Costs of items which are "Medium" in want levels: {moneyObject.mediumSpend}</div>
-    <div>Costs of items which are "Low" in want levels: {moneyObject.lowSpend}</div>
+    <div style={moneyContainer}>
+    <div style={titleDiv}>Breakdown of your current spending:</div>
+    <div style={singleDiv}>Current Monthly Income: £{moneyObject.monthlyIncome}</div>
+    <div style={singleDiv}>Current Spending Allowance: £{moneyObject.currentSpendingAllowance}</div>
+    <div style={singleDiv}>High want level item cost: £{moneyObject.highSpend}</div>
+    <div style={singleDiv}>Medium want level item cost: £{moneyObject.mediumSpend}</div>
+    <div style={singleDiv}>Low want level item cost: £{moneyObject.lowSpend}</div>
     </div>
     )
 
 }
+
+const moneyContainer = {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    marginLeft: "2rem"
+  };
+
+const titleDiv = {
+    marginTop: "0.5rem",
+    marginBottom: "0.5rem",
+    fontSize: "1.5rem"
+}
+
+  const singleDiv = {
+      marginTop: "0.5rem",
+      marginBottom: "0.5rem",
+  }

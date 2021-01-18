@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState, useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ConditionalLogicCreator } from '../components/ConditionalLogicCreator'
 import { ConditionalLogicOutput } from '../components/ConditionalLogicOutput'
@@ -6,29 +6,82 @@ import { updateGoalsIds } from '../reducers/ducks/goals/goals'
 import { MoneyContainer } from './money'
 import { Conditionals } from './conditionals'
 
-export const Progress = () => {
+export const Progress = (props) => {
     const [showOptions, changeShopwOptions] = useState(false)
+    const [addGoalStyle, updateAddGoalStyle] = useState(addGoal)
+    const [firstTime, firstTimeUpdate] = useState(false)
+
     var  goalIds  = useSelector((state) => state.goals.goalsAllId)
+    const hoverRef = useRef(null);
+
+    const hoverOver = () => {
+        const style = {
+            fontSize: "1.5rem",
+            marginLeft: "5rem",
+            hover: "pointer",
+            color: "red",
+        }
+        updateAddGoalStyle(style)
+        if(!firstTime){
+            firstTimeUpdate(true)
+        }
+    }
+
+   const hoverOut = () => {
+    const style = {
+        fontSize: "1.5rem",
+        marginLeft: "5rem",
+        hover: "pointer",
+        color: "black",
+    }
+
+    updateAddGoalStyle(style)
+    if(!firstTime){
+        firstTimeUpdate(true)
+    }
+   }
+
+   
+    useEffect(() => {
+        hoverRef.current.addEventListener('mouseover', hoverOver);
+        hoverRef.current.addEventListener('mouseout', hoverOut);
+    }, [!firstTime])
+
+    
+    useEffect(() => {
+        props.removeText()
+    })
+
    
     return(
         <div>
             <div className="moneyContainer">
                 <MoneyContainer />
             </div>
-        {!showOptions && <div onClick={() => {
-            changeShopwOptions(true)
-        }}>Add a goal:</div>}
-        <div>Your current goals:</div>
+       
+        <div className="yourCurrentGoals">Your current goals:</div>
         {goalIds.map((id, index) => {
              return <ConditionalLogicOutput  key={id} id={id} index={index + 1}/>
         })}
+          {!showOptions && <div style={addGoalStyle} ref={hoverRef} onClick={() => {
+            hoverOut()
+            changeShopwOptions(true)
+        }}>Add a goal:</div>}
         {showOptions && <div onClick={() => {
             changeShopwOptions(false)
-        }}>close</div>}
+            firstTimeUpdate(false)
+        }} className="yourCurrentGoalsClose">close</div>}
         {showOptions && <ConditionalLogicCreator number={goalIds.length + 1} closeAddGoals={() => changeShopwOptions(false)}/>}
         <div className="moneyContainer">
             <Conditionals ids={goalIds}/>
         </div>
         </div>
     )
+}
+
+var addGoal = {
+    fontSize: "1.5rem",
+    marginLeft: "5rem",
+    hover: "pointer",
+    color: "black",
 }

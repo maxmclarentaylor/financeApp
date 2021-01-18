@@ -100,7 +100,7 @@ export const RewardsOutput = () => {
 
         </div>
     })}
-   <div>{console.log(goalsResults)}</div>
+   <div>{}</div>
    </div>
    )
 }

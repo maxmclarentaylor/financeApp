@@ -9,7 +9,6 @@ export const RewardsConditional = (props) => {
 
     var state  =  useSelector((state) => state.goals.goalsById) 
 
-    const [goalValues, updateGoalValues] = useState(props.goalValues)
     const [inputValues, addInputValue] = useState([])
     const [inputDecisions, addInputDecisions] = useState([])
     const [arrayOfNamesAndKeys, updateArrayOfNamesAndKeys] = useState([])

@@ -24,5 +24,37 @@
         ["Tennis", 200],
         ["Golf", 300],
         ["Basketball", 220]
+    ],
+    "games": [
+        ["tetris", 200],
+        ["mario", 320],
+        ["gold", 220],
+        ["zelda", 200],
+        ["MGS", 300],
+        ["Ninja", 220]
+    ],
+    "films": [
+        ["Tenchi", 200],
+        ["Troy", 320],
+        ["Her", 220],
+        ["Gladiator", 200],
+        ["Bond", 300],
+        ["Soul", 220]
+    ],
+    "books": [
+        ["Lord of the Rings", 200],
+        ["Norwegian Wood", 320],
+        ["A Promised Land", 220],
+        ["Child 44", 200],
+        ["Sapiens", 300],
+        ["A Catcher in the Rye", 220]
+    ],
+    "music": [
+        ["Rolling Stones", 200],
+        ["The Beatles", 320],
+        ["The Whoe", 220],
+        ["Arctic Monkeys", 200],
+        ["Franz Ferdinand", 300],
+        ["Madonna", 220]
     ]
 }
