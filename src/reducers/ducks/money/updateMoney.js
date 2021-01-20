@@ -6,6 +6,7 @@ export const moneyUpdateReducer = createSlice({
     initialState: {
         monthlyIncome: 0,
         currentSpendingAllowance: 0,
+        allConditionalValues: [],
         highSpend : 0,
         mediumSpend: 0,
         lowSpend: 0
@@ -17,13 +18,40 @@ export const moneyUpdateReducer = createSlice({
 
         },
         increaseSpendingAllowance: (state, action) => {
-           if(state["currentSpendingAllowance"] < action.payload[0]){
-            state["currentSpendingAllowance"] = action.payload[0];
-           }
+            if(state["allConditionalValues"].indexOf(action.payload) !== -1){
+
+            }
+            else{
+                state["allConditionalValues"].push(action.payload)
+            }
+           
+            let value = 0
+            state["allConditionalValues"].forEach((number,index)=> {
+                if(number > value){
+                    value = number
+                }
+            })
+
+            state["currentSpendingAllowance"] = value
 
            return state
 
         },
+        decreaseSpendingAllowance: (state, action) => {
+           let index = state["allConditionalValues"].indexOf(action.payload)
+           state["allConditionalValues"].splice(index,1)
+           let value = 0
+           state["allConditionalValues"].forEach((number, index)=> {
+               if(parseInt(number) > value){
+                   value = number
+               }
+           })
+           state["currentSpendingAllowance"] = value
+
+           return state
+           
+        },
+
         highSpend: (state, action) => {
 
         },
@@ -49,4 +77,4 @@ export const moneyAllIdStore = createSlice({
     }
 })
 
-export const { increaseSpendingAllowance, highSpend, mediumSpend, lowSpend } = moneyUpdateReducer.actions
+export const { increaseSpendingAllowance, decreaseSpendingAllowance, highSpend, mediumSpend, lowSpend } = moneyUpdateReducer.actions

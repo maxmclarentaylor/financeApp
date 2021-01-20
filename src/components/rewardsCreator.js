@@ -7,7 +7,7 @@ import { addConditional, addConditionalId} from '../reducers/ducks/conditions/co
 
 export const RewardsConditional = (props) => {
 
-    var state  =  useSelector((state) => state.goals.goalsById) 
+    var state  =  useSelector((state) => state.goals.goalsById.allGoalObjects) 
 
     const [inputValues, addInputValue] = useState([])
     const [inputDecisions, addInputDecisions] = useState([])
@@ -15,6 +15,8 @@ export const RewardsConditional = (props) => {
     const [arrayOfNames, updateArray] = useState([])
     const [test, updateTest] = useState(true)
     const [rewardValue, RewardValueUpdate] = useState("")
+    const [errorShow, errorShowUpdate] = useState(false)
+
 
    useEffect(() => {
        var currentArray = []
@@ -42,37 +44,46 @@ export const RewardsConditional = (props) => {
             }}>-</div>}
                 {inputValues.length > 0 && 
                 <div className="equalsClass">
-                    <div>= £</div>
-                    <input onChange={(e) => {
+                    <div className="equalsClassSymbols">= £</div>
+                    <input className="inputForEqualsSymbol" onChange={(e) => {
                     RewardValueUpdate(e.target.value)
                     }}></input>
-                    <div onClick={() => {
+                    <div className="equalsSaveValue" onClick={() => {
 
-                        const uuid = uuidv4()
-                        var array = []
 
-                        inputDecisions.forEach((value1,index) => {
-                            arrayOfNames.forEach((value2,index) => {
-                                if(parseInt(value1) === value2[1])
-                                array.push([value2[0], uuidv4()])
+                        if(inputDecisions.length !== 0 && rewardValue !== ""){
+                            const uuid = uuidv4()
+                            var array = []
+    
+                        
+    
+                            inputDecisions.forEach((value1,index) => {
+                                arrayOfNames.forEach((value2,index) => {
+                                    if(parseInt(value1) === value2[1])
+                                    array.push([value2[0], uuidv4()])
+                                })
                             })
-                        })
-                      
-                        array.push([parseInt(rewardValue), uuidv4()])
+                          
+                            array.push([parseInt(rewardValue), uuidv4()])
+                            
+                            var objectToSend = {}
+    
+                            objectToSend.key = uuid
+                            objectToSend.value = array
                         
-                        var objectToSend = {}
-
-                        objectToSend.key = uuid
-                        objectToSend.value = array
-                    
-                        dispatch(addConditionalId(uuid))
-                        dispatch(addConditional(objectToSend))
-
-                        addInputValue([])
-                        addInputDecisions([])
-                        
+                            dispatch(addConditionalId(uuid))
+                            dispatch(addConditional(objectToSend))
+    
+                            addInputValue([])
+                            addInputDecisions([])
+                            errorShowUpdate(false)
+                        }
+                        else{
+                            errorShowUpdate(true)
+                        }
 
                     }} >Save value</div>
+                    {errorShow && <div className="equalsFilledIn">Each option must be properly filled in</div>}
                 </div>}
         </div>
     )

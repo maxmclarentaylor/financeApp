@@ -21,32 +21,32 @@ const dispatch = useDispatch()
         <div className="goalCreator">
             <div className="createYourGoal">Create your goal</div>
             <div className="theActualGoal">
-            <div>
-                <p>Name of goal</p>
+            <div >
+                <p className="nameOfGoalWrapper">Name of goal</p>
             <input className="inputLength" type="text" placeholder="Name of Goal, e.g. Running" onChange={(props) => {
               UpdateGoalName(props.target.value)
             }} value={goalName}></input>
             </div>
-            <div className="goalDiv">
-                <p>Higher or lower</p>
+            <div className="goalDivHigher">
+                <p className="nameOfGoalWrapper">Higher or lower</p>
             <Dropdown options={arrayOfOptions} className="dropDownOption" onChange={(value) => {
                 UpdateHigherLower(value.value)
             }} value={""}  />
             </div>
-            <div className="goalDiv">
-                <p>Amount to achieve</p>
+            <div className="goalDivHigher">
+                <p className="nameOfGoalWrapper">Amount to achieve</p>
             <input className="inputLength2" type="number" placeholder="Amount to achieve" onChange={(props) => {
                 const number = parseInt(props.target.value)
                 UpdateamountToAchieve(number)
             }} value={amountToAchieve}></input>
             </div>
-            <div className="goalDiv">
-                <p>Metric</p>
+            <div className="goalDivHigher">
+                <p className="nameOfGoalWrapper">Metric</p>
             <input className="inputLength3" type="text" placeholder="Metric type e.g. miles" onChange={(props) => {
               UpdateMetric(props.target.value)
             }} value={metricName}></input>
             </div>
-            <div className="goalDiv">
+            <div className="goalDivHigher">
             <p onClick={() => {
                 var objectToSend ={   
                 }
@@ -64,14 +64,16 @@ const dispatch = useDispatch()
                     UpdateHigherLower("")
                     UpdateamountToAchieve("")
                     props.closeAddGoals()
+                    props.updateHover()
 
                 }
                 else{
                     updateErrors(true)
                 }
+                
 
             }}>Save goal</p>
-            {errors && <div>You must fill out all options before you send</div>}
+            {errors && <div className="allOptionFilled">All options must be filled in before you save!</div>}
             </div>
             </div>
         </div>

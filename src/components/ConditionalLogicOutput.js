@@ -8,7 +8,7 @@ import { conditionalsSuccess } from '../functions/conditionalsSuccess'
 
 export const ConditionalLogicOutput = (props) => {
 
-    var  goalObject  = useSelector((state) => state.goals.goalsById[props.id])
+    var  goalObject  = useSelector((state) => state.goals.goalsById.allGoalObjects[props.id])
     const [key, updateKeys] = useState(props.id)
     const dispatch  =  useDispatch()
     const [goalName, UpdateGoalName] = useState(goalObject.goalName)
@@ -16,8 +16,8 @@ export const ConditionalLogicOutput = (props) => {
     const [higherLower, UpdateHigherLower] = useState(goalObject.target)
     const [amountToAchieve, UpdateamountToAchieve] = useState(goalObject.amountToAchieve)
     const [userAchievement, UpdateuserAchievement] = useState("")
-    const [pass, updatePass] = useState("")
-
+    const [pass, updatePass] = useState("incomplete")
+    const [pass2, updatePass2] = useState("incomplete")
 
     return(
         <div className="goalCreatorYes">
@@ -30,24 +30,35 @@ export const ConditionalLogicOutput = (props) => {
             </div>
             <div className="goalDiv2">
                 <p>Your result</p>
-            <input className="inputLength3" type="number" placeholder="Amount to achieve" onChange={(props) => {
+            <input className="inputLength3" type="number" placeholder="Amount you achieved" onChange={(props) => {
             var success = ""
+            
+           
 
             const valueReturn = conditionalsSuccess(props.target.value, higherLower, amountToAchieve, success)
+            
 
-            var successObjectToSend = {}
-
-            successObjectToSend["success"] = valueReturn
-            successObjectToSend["key"] = key
-
-            dispatch(updateGoalsSuccess(successObjectToSend))
             updatePass(valueReturn)
               UpdateuserAchievement(props.target.value)
             }} value={userAchievement}></input>
             </div>
             <div className="goalDiv2">
+                <p onClick={() => {
+                    if(pass === pass2){
+
+                    }
+                    else{
+                        var successObjectToSend = {}
+                        successObjectToSend["success"] = pass
+                        successObjectToSend["key"] = key
+                        dispatch(updateGoalsSuccess(successObjectToSend))
+                        updatePass2(pass)
+                    }
+                }}>Save result</p>
+            </div>
+            <div className="goalDiv2">
                 <p>Success</p>
-                 <div>{pass}</div>
+                 <div>{pass2}</div>
             </div>
             <div className="goalDiv2">
                 <p onClick={() => {

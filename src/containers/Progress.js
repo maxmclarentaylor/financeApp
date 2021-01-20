@@ -5,11 +5,13 @@ import { ConditionalLogicOutput } from '../components/ConditionalLogicOutput'
 import { updateGoalsIds } from '../reducers/ducks/goals/goals'
 import { MoneyContainer } from './money'
 import { Conditionals } from './conditionals'
+import { v4 as uuidv4 } from 'uuid';
 
 export const Progress = (props) => {
     const [showOptions, changeShopwOptions] = useState(false)
     const [addGoalStyle, updateAddGoalStyle] = useState(addGoal)
     const [firstTime, firstTimeUpdate] = useState(false)
+    const [keyForProgress, keyForProgressUpdate] = useState(uuidv4())
 
     var  goalIds  = useSelector((state) => state.goals.goalsAllId)
     const hoverRef = useRef(null);
@@ -20,6 +22,7 @@ export const Progress = (props) => {
             marginLeft: "5rem",
             hover: "pointer",
             color: "red",
+            width: "15%"
         }
         updateAddGoalStyle(style)
         if(!firstTime){
@@ -33,6 +36,7 @@ export const Progress = (props) => {
         marginLeft: "5rem",
         hover: "pointer",
         color: "black",
+        width: "15%"
     }
 
     updateAddGoalStyle(style)
@@ -45,12 +49,10 @@ export const Progress = (props) => {
     useEffect(() => {
         hoverRef.current.addEventListener('mouseover', hoverOver);
         hoverRef.current.addEventListener('mouseout', hoverOut);
+        props.removeText()
     }, [!firstTime])
 
-    
-    useEffect(() => {
-        props.removeText()
-    })
+
 
    
     return(
@@ -71,8 +73,9 @@ export const Progress = (props) => {
             changeShopwOptions(false)
             firstTimeUpdate(false)
         }} className="yourCurrentGoalsClose">close</div>}
-        {showOptions && <ConditionalLogicCreator number={goalIds.length + 1} closeAddGoals={() => changeShopwOptions(false)}/>}
-        <div className="moneyContainer">
+        {showOptions && <ConditionalLogicCreator number={goalIds.length + 1} closeAddGoals={() => changeShopwOptions(false)} updateHover={() => { firstTimeUpdate(false)}}/>}
+      
+        <div className="createYourGoalRewards" >
             <Conditionals ids={goalIds}/>
         </div>
         </div>
@@ -84,4 +87,5 @@ var addGoal = {
     marginLeft: "5rem",
     hover: "pointer",
     color: "black",
+    width: "15%"
 }

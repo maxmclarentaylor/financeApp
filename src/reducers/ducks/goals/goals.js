@@ -4,10 +4,12 @@ import { createSlice } from '@reduxjs/toolkit'
 export const updateGoals = createSlice({
     name: 'goals',
     initialState: {
-
+        previousValuesArray: {},
+        allGoalObjects: {}
     },
     reducers: {
         addGoal: (state, action)=>{
+
             var newGoal ={
             }
             newGoal.goalName = action.payload.goalName
@@ -16,15 +18,22 @@ export const updateGoals = createSlice({
             newGoal.amountToAchieve = action.payload.amountToAchieve
             newGoal.success = "incomplete"
             newGoal.goalNumber = action.payload.goalNumber
-            state[action.payload.key] = newGoal
+            state.allGoalObjects[action.payload.key] = newGoal
             return state
         },
         deleteGoal: (state, action) => {
-            delete state[action.payload]
+            delete state.previousValuesArray[state[action.payload].goalNumber]
+            delete state.allGoalObjects[action.payload]
             return state
 
         },
         updateGoalsSuccess: (state,action) => {
+            if(state.previousValuesArray[state.allGoalObjects[action.payload.key].goalNumber]){
+                state.previousValuesArray[state.allGoalObjects[action.payload.key].goalNumber] = state.allGoalObjects[action.payload.key].success
+            }
+            else{
+                state.previousValuesArray[state.allGoalObjects[action.payload.key].goalNumber] = state.allGoalObjects[action.payload.key].success
+            }
                 var success = ""
                     if(action.payload.success === "passed"){
                         success = true
@@ -35,9 +44,20 @@ export const updateGoals = createSlice({
                     else{
                         success = false
                     }
-                state[action.payload.key]["success"] = success
+                state.allGoalObjects[action.payload.key]["success"] = success
                 return state
-        }
+        },
+        updatePreviousValuesArrayOnly: (state, action) => {
+            action.payload.forEach((array,index) => {
+                    if(state.previousValuesArray[array[0]]){
+                        state.previousValuesArray[array[0]] = array[1]
+                    }
+                    else{
+                        state.previousValuesArray[array[0]] = array[1]
+                    }
+            })
+            return state
+        },
     }
 })
 
@@ -57,4 +77,4 @@ export const updateGoalsIds = createSlice({
     }
 })
 
-export const { addGoal, deleteGoal, updateGoalsSuccess } = updateGoals.actions
+export const { addGoal, deleteGoal, updateGoalsSuccess, updatePreviousValuesArrayOnly } = updateGoals.actions

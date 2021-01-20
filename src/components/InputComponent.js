@@ -5,8 +5,8 @@ export const InputComponent = (props) => {
     const [goalsExist, changeGoalExists] = useState(true)
 
     return(
-        <div>
-        <input
+        <div style={{width : "10em"}}>
+        <input className="inputGoalCreator"
         onChange={(e) => {
             if(e.target.value === ""){
                 console.log(props.currentValues)
@@ -32,8 +32,8 @@ export const InputComponent = (props) => {
                 changeGoalExists(false)
             }
         }}></input>
-        {!goalsExist && <div>Value does not exist (look at your Goal Numbers)</div>}
+         <div>Goal number</div>
+        {!goalsExist && <div>Value does not exist (look into your current goals)</div>}
         </div>
     )
-
 }
