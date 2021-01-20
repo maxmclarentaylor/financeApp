@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const updateConditions = createSlice({
     name: 'conditions',
-    initialState: {
-
-    },
+    initialState: [],
     reducers: {
         addConditional: (state, action) => {
            state[action.payload.key] = action.payload.value
@@ -36,12 +34,10 @@ export const updateConditions = createSlice({
 
 export const updateConditionsId = createSlice({
     name: 'conditions',
-    initialState: {
-
-    },
+    initialState: [],
     reducers: {
         addConditionalId: (state, action) => {
-
+            
             state.push(action.payload)
 
             return state
@@ -60,8 +56,32 @@ export const updateConditionsId = createSlice({
     }
 })
 
+export const newConditionalUsed = createSlice({
+    name: 'conditions',
+    initialState: [],
+    reducers: {
+        addNewUsedConditional: (state, action) => {
+            
+                state.push(action.payload)
+
+            return state
+
+        },
+        deleteUsedConditionalId: (state, action) => {
+            
+            let number = state.indexOf(action.payload)
+            state.splice(number,1)
+
+            return state
+        }
+    }
+})
+
 export const { addConditional, removeConditional1, removeConditional2 } = updateConditions.actions
 
 
 export const { addConditionalId, deleteConditionalId } = updateConditionsId.actions
+
+
+export const { addNewUsedConditional, deleteUsedConditionalId } = newConditionalUsed.actions
 

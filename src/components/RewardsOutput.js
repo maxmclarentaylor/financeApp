@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteConditionalId, removeConditional2 } from '../reducers/ducks/conditions/conditions'
+import { deleteConditionalId, removeConditional2, addNewUsedConditional, deleteUsedConditionalId } from '../reducers/ducks/conditions/conditions'
 import { increaseSpendingAllowance, decreaseSpendingAllowance } from '../reducers/ducks/money/updateMoney'
 import { updatePreviousValuesArrayOnly } from '../reducers/ducks/goals/goals'
 
@@ -13,11 +13,18 @@ export const RewardsOutput = React.memo((props) => {
     var goalsObject  = useSelector((state) => state.goals)
     var conditionalsObject = useSelector((state) => state.conditions.conditionsById)
     var conditionalsObjectId = useSelector((state) => state.conditions.conditionsAllIds)
+    var conditionalsUsedSofar = useSelector((state) => state.conditions.newConditionalUsed)
     const [goalsResults, updateGoalResults] = useState([])
-    const [numberToSend, updateNumberToSend] = useState([])
+    
+    const [currentConditionals, updateCurrentConditionals] = useState(conditionalsUsedSofar)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        updateCurrentConditionals(conditionalsUsedSofar)
+    },[conditionalsUsedSofar])
   
     useEffect(() => {
+        console.log(currentConditionals)
         updateGoalResults([])
 
     var arrayOfGoalOutputs = []
@@ -31,6 +38,16 @@ export const RewardsOutput = React.memo((props) => {
     })
         for(const property in conditionalsObject){
             var conditionalArray = []
+            let newConditional = ""
+
+           
+           var key = currentConditionals.find(x => x === property)
+           if(key){
+            newConditional = false
+           }
+           else{
+                newConditional = true
+           }
            const goalArray = conditionalsObject[property]
             var success = true
             var incomplete = false
@@ -43,6 +60,7 @@ export const RewardsOutput = React.memo((props) => {
                 conditionalArray.push([goalsObject.goalsById.allGoalObjects[value[0]].goalName, value[1]])
                 numberArrayYes.push(goalsObject.goalsById.previousValuesArray[goalsObject.goalsById.allGoalObjects[value[0]].goalNumber])
                 passValuesOfGoals.push([goalsObject.goalsById.allGoalObjects[value[0]].goalNumber, goalsObject.goalsById.allGoalObjects[value[0]].success])
+
                 if(goalsObject.goalsById.allGoalObjects[value[0]].success === "incomplete" ){
                     incomplete = true
                     success = false
@@ -53,16 +71,28 @@ export const RewardsOutput = React.memo((props) => {
                }
            })
 
-           console.log(numberArrayYes)
+           console.log(success)
+           console.log(newConditional)
            if(success){
-                if(numberArrayYes.indexOf(false) !== -1 || numberArrayYes.indexOf("incomplete") !== -1){
+               if(newConditional){
+               dispatch(increaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
+                dispatch(addNewUsedConditional(property))
+
+               }
+               else{ 
+                   if(numberArrayYes.indexOf(false) !== -1 || numberArrayYes.indexOf("incomplete") !== -1){
                     dispatch(increaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
                 }
+            }
            }
            else{
-            if(numberArrayYes.indexOf(false) === -1 && numberArrayYes.indexOf("incomplete") === -1){
+               if(newConditional){
+
+               }
+           else{ if(numberArrayYes.indexOf(false) === -1 && numberArrayYes.indexOf("incomplete") === -1){
                 dispatch(decreaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
             }
+                }
            }
            rewardsTester(incomplete,success,conditionalArray)
             conditionalArray.push(property)
@@ -84,9 +114,9 @@ export const RewardsOutput = React.memo((props) => {
 
    return(
     <div>
-    {console.log(goalsResults)}
     {goalsResults.map((value, index) => {
         let integer = 0
+        let completionMark = true
       return <div className="goalsResultsContainer" key={value[value.length - 1]}>
             {value.map((condValues, index) => {
               
@@ -103,9 +133,11 @@ export const RewardsOutput = React.memo((props) => {
                     }
                     else if(condValues === "incomplete"){
                         valueString = "incomplete" 
+                        completionMark = false
                     }
                     else if (condValues === false){
                         valueString = "fail"
+                        completionMark = false
                     }
                     return <div  className="goalTypeName" key={valueString + value[index - 1][1]}>{valueString}</div>
                 }
@@ -117,7 +149,16 @@ export const RewardsOutput = React.memo((props) => {
                         () => {
                             dispatch(deleteConditionalId([condValues]))
                             dispatch(removeConditional2(condValues))
-                            dispatch(decreaseSpendingAllowance(integer))
+                            //dispatch(deleteUsedConditionalId(value[value.length - 1]))
+                            console.log(completionMark)
+                            if(completionMark){
+                                dispatch(decreaseSpendingAllowance(integer))
+                                
+                            }
+                            else{
+
+                            }
+                          
 
                         }
                     }

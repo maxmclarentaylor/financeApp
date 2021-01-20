@@ -15,9 +15,9 @@ export const ConditionalLogicOutput = (props) => {
     const [metricName, UpdateMetric] = useState(goalObject.metric)
     const [higherLower, UpdateHigherLower] = useState(goalObject.target)
     const [amountToAchieve, UpdateamountToAchieve] = useState(goalObject.amountToAchieve)
-    const [userAchievement, UpdateuserAchievement] = useState("")
+    const [userAchievement, UpdateuserAchievement] = useState(goalObject.amountComplete)
     const [pass, updatePass] = useState("incomplete")
-    const [pass2, updatePass2] = useState("incomplete")
+    const [pass2, updatePass2] = useState(goalObject.successString)
 
     return(
         <div className="goalCreatorYes">
@@ -51,6 +51,7 @@ export const ConditionalLogicOutput = (props) => {
                         var successObjectToSend = {}
                         successObjectToSend["success"] = pass
                         successObjectToSend["key"] = key
+                        successObjectToSend["amountComplete"] = userAchievement
                         dispatch(updateGoalsSuccess(successObjectToSend))
                         updatePass2(pass)
                     }

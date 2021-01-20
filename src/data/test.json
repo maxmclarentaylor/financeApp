@@ -104,7 +104,8 @@
         "conditionsById": {
 
         },
-        "conditionsAllIds": []
+        "conditionsAllIds": [],
+        "newConditionalUsed": []
    }
 }
 

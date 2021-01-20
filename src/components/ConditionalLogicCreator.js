@@ -56,6 +56,8 @@ const dispatch = useDispatch()
                 objectToSend.metric = metricName
                 objectToSend.amountToAchieve = amountToAchieve
                 objectToSend.goalNumber = props.number
+                objectToSend.amountComplete = ""
+                objectToSend.success = "incomplete"
                 if(goalName !== "" && higherLower !== "" && metricName !== "" && amountToAchieve !== "") {
                     dispatch(addGoal(objectToSend))
                     updateErrors(false)

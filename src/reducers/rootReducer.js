@@ -3,7 +3,7 @@ import { HOFReducerItem, allIdsStore } from './ducks/items/individualItemHOC'
 import { moneyUpdateReducer, moneyAllIdStore } from './ducks/money/updateMoney'
 import { updateMonthlySpend, updateMonthlySpendAllIdStore } from './ducks/spendingPerMonth/spendingPerMonth'
 import { updateGoals, updateGoalsIds } from './ducks/goals/goals'
-import { updateConditions, updateConditionsId } from './ducks/conditions/conditions'
+import { updateConditions, updateConditionsId, newConditionalUsed} from './ducks/conditions/conditions'
 
 
 var individualItemsReducers = combineReducers({
@@ -39,7 +39,8 @@ const goalsReducer = combineReducers({
 
 const conditionsReducer = combineReducers({
     conditionsById: updateConditions.reducer,
-    conditionsAllIds: updateConditionsId.reducer
+    conditionsAllIds: updateConditionsId.reducer,
+    newConditionalUsed: newConditionalUsed.reducer
 })
 
 export const rootReducer = combineReducers({

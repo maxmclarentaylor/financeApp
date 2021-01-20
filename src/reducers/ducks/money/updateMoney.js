@@ -18,12 +18,9 @@ export const moneyUpdateReducer = createSlice({
 
         },
         increaseSpendingAllowance: (state, action) => {
-            if(state["allConditionalValues"].indexOf(action.payload) !== -1){
-
-            }
-            else{
+           
                 state["allConditionalValues"].push(action.payload)
-            }
+            
            
             let value = 0
             state["allConditionalValues"].forEach((number,index)=> {
