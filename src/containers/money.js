@@ -8,11 +8,9 @@ export const MoneyContainer = () => {
     return(
     <div style={moneyContainer}>
     <div style={titleDiv}>Breakdown of your current spending:</div>
-    <div style={singleDiv}>Current Monthly Income: £{moneyObject.monthlyIncome}</div>
+   
     <div style={singleDiv}>Current Spending Allowance: £{moneyObject.currentSpendingAllowance}</div>
-    <div style={singleDiv}>High want level item cost: £{moneyObject.highSpend}</div>
-    <div style={singleDiv}>Medium want level item cost: £{moneyObject.mediumSpend}</div>
-    <div style={singleDiv}>Low want level item cost: £{moneyObject.lowSpend}</div>
+ 
     </div>
     )
 

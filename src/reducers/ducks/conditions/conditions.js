@@ -15,9 +15,11 @@ export const updateConditions = createSlice({
             for(const property in state){
                     var remove = false
                     state[property].map((value, index) => {
-                        if(value === action.payload){
-                            remove = true
-                        }
+                        value.map((value2,index2) => {
+                                if(value2 === action.payload){
+                                    remove = true
+                                }
+                        })
                     })
                     if(remove){
                         delete state[property]
@@ -52,6 +54,12 @@ export const updateConditionsId = createSlice({
                 })
             }) 
             return state
+        },
+        deleteConditionalIdGoalRemove: (state, action) => {
+            let number = state.indexOf(action.payload)
+            state.splice(number,1)
+
+            return state
         }
     }
 })
@@ -80,7 +88,7 @@ export const newConditionalUsed = createSlice({
 export const { addConditional, removeConditional1, removeConditional2 } = updateConditions.actions
 
 
-export const { addConditionalId, deleteConditionalId } = updateConditionsId.actions
+export const { addConditionalId, deleteConditionalId, deleteConditionalIdGoalRemove } = updateConditionsId.actions
 
 
 export const { addNewUsedConditional, deleteUsedConditionalId } = newConditionalUsed.actions

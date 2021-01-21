@@ -2,7 +2,8 @@ import React, { useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import 'react-dropdown/style.css';
 import {  deleteGoal, updateGoalsSuccess } from '../reducers/ducks/goals/goals'
-import {  removeConditional1 } from '../reducers/ducks/conditions/conditions'
+import { decreaseSpendingAllowanceGoalRemoval } from '../reducers/ducks/money/updateMoney'
+import {  removeConditional1, deleteConditionalIdGoalRemove, deleteUsedConditionalId } from '../reducers/ducks/conditions/conditions'
 import { conditionalsSuccess } from '../functions/conditionalsSuccess'
 
 
@@ -65,6 +66,9 @@ export const ConditionalLogicOutput = (props) => {
                 <p onClick={() => {
                     dispatch(removeConditional1(props.id))
                     dispatch(deleteGoal(props.id))
+                    dispatch(deleteConditionalIdGoalRemove(props.id))
+                    dispatch(deleteUsedConditionalId(props.id))
+                    dispatch(decreaseSpendingAllowanceGoalRemoval(props.id))
                 }}>Remove goal</p>
                 
             </div>

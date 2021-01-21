@@ -57,7 +57,7 @@ export const RewardsOutput = React.memo((props) => {
                 conditionalArray.push(value)
                }
                else{
-                conditionalArray.push([goalsObject.goalsById.allGoalObjects[value[0]].goalName, value[1]])
+                conditionalArray.push([goalsObject.goalsById.allGoalObjects[value[0]].goalName, value[1], value[0]])
                 numberArrayYes.push(goalsObject.goalsById.previousValuesArray[goalsObject.goalsById.allGoalObjects[value[0]].goalNumber])
                 passValuesOfGoals.push([goalsObject.goalsById.allGoalObjects[value[0]].goalNumber, goalsObject.goalsById.allGoalObjects[value[0]].success])
 
@@ -71,17 +71,28 @@ export const RewardsOutput = React.memo((props) => {
                }
            })
 
-           console.log(success)
-           console.log(newConditional)
+           let goalKeys = []
+           goalArray.forEach((array, index) => {
+               if(index === goalArray.length - 1){
+
+               }
+               else{
+                    goalKeys.push(array[0])
+               }
+           })
+         
            if(success){
+            
+
                if(newConditional){
-               dispatch(increaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
+                   
+               dispatch(increaseSpendingAllowance([goalKeys,[goalArray[goalArray.length - 1][0]]]))
                 dispatch(addNewUsedConditional(property))
 
                }
                else{ 
                    if(numberArrayYes.indexOf(false) !== -1 || numberArrayYes.indexOf("incomplete") !== -1){
-                    dispatch(increaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
+                    dispatch(increaseSpendingAllowance([goalKeys,[goalArray[goalArray.length - 1][0]]]))
                 }
             }
            }
@@ -90,7 +101,7 @@ export const RewardsOutput = React.memo((props) => {
 
                }
            else{ if(numberArrayYes.indexOf(false) === -1 && numberArrayYes.indexOf("incomplete") === -1){
-                dispatch(decreaseSpendingAllowance(goalArray[goalArray.length - 1][0]))
+                dispatch(decreaseSpendingAllowance([goalKeys,[goalArray[goalArray.length - 1][0]]]))
             }
                 }
            }
@@ -114,9 +125,11 @@ export const RewardsOutput = React.memo((props) => {
 
    return(
     <div>
+        {console.log(goalsResults)}
     {goalsResults.map((value, index) => {
         let integer = 0
         let completionMark = true
+        let arrayForDecrease = []
       return <div className="goalsResultsContainer" key={value[value.length - 1]}>
             {value.map((condValues, index) => {
               
@@ -152,7 +165,7 @@ export const RewardsOutput = React.memo((props) => {
                             //dispatch(deleteUsedConditionalId(value[value.length - 1]))
                             console.log(completionMark)
                             if(completionMark){
-                                dispatch(decreaseSpendingAllowance(integer))
+                                dispatch(decreaseSpendingAllowance([arrayForDecrease,integer]))
                                 
                             }
                             else{
@@ -165,6 +178,7 @@ export const RewardsOutput = React.memo((props) => {
                     >Remove Condition</div>
                 }
                 else{
+                    arrayForDecrease.push(condValues[2])
                     return <div className="goalTypeName" key={condValues[1]}>{condValues[0] + " "}</div>
                 }
             })}
