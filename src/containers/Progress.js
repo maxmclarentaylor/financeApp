@@ -13,7 +13,9 @@ export const Progress = (props) => {
     const [firstTime, firstTimeUpdate] = useState(false)
     const [keyForProgress, keyForProgressUpdate] = useState(uuidv4())
 
-    var  goalIds  = useSelector((state) => state.goals.goalsAllId)
+    var  goals  = useSelector((state) => state.goals)
+    var goalIds = goals.goalsAllId
+    var number = goals.goalsById.numberOfGoalsEverToExist
     const hoverRef = useRef(null);
 
     const hoverOver = () => {
@@ -73,7 +75,7 @@ export const Progress = (props) => {
             changeShopwOptions(false)
             firstTimeUpdate(false)
         }} className="yourCurrentGoalsClose">close</div>}
-        {showOptions && <ConditionalLogicCreator number={goalIds.length + 1} closeAddGoals={() => changeShopwOptions(false)} updateHover={() => { firstTimeUpdate(false)}}/>}
+        {showOptions && <ConditionalLogicCreator number={number + 1} closeAddGoals={() => changeShopwOptions(false)} updateHover={() => { firstTimeUpdate(false)}}/>}
       
         <div className="createYourGoalRewards" >
             <Conditionals ids={goalIds}/>

@@ -5,7 +5,8 @@ export const updateGoals = createSlice({
     name: 'goals',
     initialState: {
         previousValuesArray: {},
-        allGoalObjects: {}
+        allGoalObjects: {},
+        numberOfGoalsEverToExist: 0
     },
     reducers: {
         addGoal: (state, action)=>{
@@ -21,6 +22,7 @@ export const updateGoals = createSlice({
             newGoal.amountComplete = action.payload.amountComplete
             newGoal.goalNumber = action.payload.goalNumber
             state.allGoalObjects[action.payload.key] = newGoal
+            state.numberOfGoalsEverToExist += 1
             return state
         },
         deleteGoal: (state, action) => {

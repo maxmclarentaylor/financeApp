@@ -17,12 +17,13 @@ export const ConditionalLogicOutput = (props) => {
     const [higherLower, UpdateHigherLower] = useState(goalObject.target)
     const [amountToAchieve, UpdateamountToAchieve] = useState(goalObject.amountToAchieve)
     const [userAchievement, UpdateuserAchievement] = useState(goalObject.amountComplete)
+    const [goalNumber, updateGoalNumber] = useState(goalObject.goalNumber)
     const [pass, updatePass] = useState("incomplete")
     const [pass2, updatePass2] = useState(goalObject.successString)
 
     return(
         <div className="goalCreatorYes">
-           <div className="goalDiv2">{props.index}.</div>
+           <div className="goalDiv2">{goalNumber}.</div>
             <div className="goalDiv2">
                 <p>Name of goal: {goalName}, </p>
             </div>

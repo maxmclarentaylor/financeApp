@@ -95,7 +95,8 @@
    "goals": {
        "goalsById": {
         "previousValuesArray": {},
-         "allGoalObjects" : {}
+         "allGoalObjects" : {},
+         "numberOfGoalsEverToExist": 0
        },
        
        "goalsAllId": []
