@@ -41,7 +41,7 @@ export const moneyUpdateReducer = createSlice({
                 let found =  true
               action.payload[0].map((value, index2) => {
                     let result = number[0].indexOf(value)
-                    console.log(result)
+                   
                     if(result === -1){
                         found = false
                     }
@@ -67,23 +67,29 @@ export const moneyUpdateReducer = createSlice({
            
         },
         decreaseSpendingAllowanceGoalRemoval: (state, action) => {
-            let remove = []
+          
+            var results = []
             state["allConditionalValues"].forEach((number,index)=> {
                 
                 var find = number[0].indexOf(action.payload)
+                console.log(find)
                 if(find !== -1){
-                    remove.push(index)
+                    results.push(index)
                 }
               
             
             })
-            if(remove.length > 0){
-                remove.map((integer, index) => {
-                    console.log(integer)
-                    state["allConditionalValues"].splice(integer,1)
-                })
+            
+                var loopAmount = 0
+                while(results.length > 0){
+                    let numberToUse = results[0]
+                    let finalNumber = numberToUse - loopAmount
+                    state["allConditionalValues"].splice(finalNumber,1)
+                    results.splice(0,1)
+                    loopAmount += 1
+                }
                 
-            }
+            
            
            let value = 0
            state["allConditionalValues"].forEach((number,index)=> {
