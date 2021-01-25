@@ -3,18 +3,32 @@ import React, {useState} from 'react'
 export const InputComponent = (props) => {
 
     const [goalsExist, changeGoalExists] = useState(true)
+    const [localValue, updateLocalValue] = useState("")
+
+    
 
     return(
         <div style={{width : "10em"}}>
         <input className="inputGoalCreator"
         onChange={(e) => {
             if(e.target.value === ""){
-                console.log(props.currentValues)
-                var newArray = props.currentValues.slice(0,props.currentValues.length - 1)
-                console.log(newArray)
-                props.update(newArray)
-                changeGoalExists(true)
-                return 
+                if(localValue){
+                    updateLocalValue("")
+                }
+                else{
+                    let intergIndex = props.currentValues.indexOf(localValue)
+                    var newArray = JSON.parse(JSON.stringify(props.currentValues))
+                    newArray.splice(intergIndex,1)
+                    props.update(newArray)
+                    props.resetConditional(false)
+                    let array =  JSON.parse(JSON.stringify(props.errorArray))
+                    array.splice(1, props.errorArray.indexOf(true))
+                    props.error(array)
+                    updateLocalValue("")
+                    changeGoalExists(true)
+                    return 
+                }
+              
             }
             var exists = false
             props.goals.map((value, index) => {
@@ -27,11 +41,18 @@ export const InputComponent = (props) => {
                 var newArray = props.currentValues.concat(e.target.value)
                 changeGoalExists(true)
                 props.update(newArray)
+                
+              
             }
             else{
                 changeGoalExists(false)
-            }
-        }}></input>
+                let array =  JSON.parse(JSON.stringify(props.errorArray))
+                array.push(true)
+                updateLocalValue(e.target.value)
+                props.error(array)
+            }}}
+            value={props.value || "" || localValue}
+            ></input>
          <div>Goal number</div>
         {!goalsExist && <div>Value does not exist (look into your current goals)</div>}
         </div>
