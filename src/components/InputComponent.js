@@ -4,8 +4,7 @@ export const InputComponent = (props) => {
 
     const [goalsExist, changeGoalExists] = useState(true)
     const [localValue, updateLocalValue] = useState("")
-
-    
+    const [correctLocalValue, upddateCorrectLocalValue] = useState("")
 
     return(
         <div style={{width : "10em"}}>
@@ -14,25 +13,26 @@ export const InputComponent = (props) => {
             if(e.target.value === ""){
                 if(localValue){
                     updateLocalValue("")
+                    let array =  JSON.parse(JSON.stringify(props.errorArray))
+                    let index = array.indexOf(true)
+                    array.splice(index,1)
+                    props.error(array)
+                    props.errorKey(false)
+                    return
                 }
                 else{
-                    let intergIndex = props.currentValues.indexOf(localValue)
+                    let intergIndex = props.currentValues.indexOf(correctLocalValue)
                     var newArray = JSON.parse(JSON.stringify(props.currentValues))
                     newArray.splice(intergIndex,1)
                     props.update(newArray)
                     props.resetConditional(false)
-                    let array =  JSON.parse(JSON.stringify(props.errorArray))
-                    array.splice(1, props.errorArray.indexOf(true))
-                    props.error(array)
-                    updateLocalValue("")
                     changeGoalExists(true)
+                    props.errorKey(false)
                     return 
                 }
-              
             }
             var exists = false
             props.goals.map((value, index) => {
-                console.log(value)
                 if(value[1] === parseInt(e.target.value)){
                     exists = true
                 }
@@ -40,9 +40,8 @@ export const InputComponent = (props) => {
             if(exists){
                 var newArray = props.currentValues.concat(e.target.value)
                 changeGoalExists(true)
+                upddateCorrectLocalValue(e.target.value)
                 props.update(newArray)
-                
-              
             }
             else{
                 changeGoalExists(false)
@@ -58,3 +57,4 @@ export const InputComponent = (props) => {
         </div>
     )
 }
+

@@ -19,6 +19,7 @@ export const RewardsConditional = (props) => {
     const [errorShow, errorShowUpdate] = useState([])
     const [alreadyConditional, upateAlreadyConditional] = useState(false)
     const [showErrorMessage, showErrorMessageUpdate ] = useState(false)
+    const [noValueMade, upateNoValueMade] = useState(false)
 
 
    useEffect(() => {
@@ -35,27 +36,47 @@ export const RewardsConditional = (props) => {
     return(
         <div className="customGoalContainer">
             {inputValues.map((value, index) => {
-                return <InputComponent error={errorShowUpdate} errorArray={errorShow} index={index} currentValues={inputDecisions} update={addInputDecisions} value={inputDecisions[index]} goals={arrayOfNames} resetConditional={upateAlreadyConditional} key={index + "inputComponent"}/>
+                return <InputComponent errorKey={showErrorMessageUpdate} error={errorShowUpdate} errorArray={errorShow} index={index} currentValues={inputDecisions} update={addInputDecisions} value={inputDecisions[index]} goals={arrayOfNames} resetConditional={upateAlreadyConditional} key={index + "inputComponent"}/>
             })}
-            <div className="plus" onClick={() => 
-                addInputValue(inputValues.concat(0))}>+</div>
+            <div className="plus" onClick={() => {
+                if(inputDecisions.length !== inputValues.length){
+                    upateNoValueMade(true)
+                }
+                else{
+                    upateNoValueMade(false)
+                    upateAlreadyConditional(false)
+                    addInputValue(inputValues.concat(0))
+                }
+                }}>+</div>
+                {noValueMade && <div>Please add in a value or remove error</div>}
                 {inputValues.length > 0 && <div className="plus" onClick={() => {
                 const array = inputValues.slice(0, inputValues.length - 1)
                 addInputValue(array)
+                errorShowUpdate([])
                 if(inputDecisions.length > array.length){
                 const array2 = inputDecisions.slice(0, inputDecisions.length - 1)
                 addInputDecisions(array2)
-                const newErrorArray = errorShow.slice(0, errorShow.length - 1)
-                errorShowUpdate(newErrorArray)
                 }
+                if(array.length === 0){
+                    RewardValueUpdate("")
+                }
+                upateNoValueMade(false)
+                upateAlreadyConditional(false)
+                showErrorMessageUpdate(false)
             }}>-</div>}
                 {inputValues.length > 0 && 
                 <div className="equalsClass">
                     <div className="equalsClassSymbols">= £</div>
                     <input className="inputForEqualsSymbol" onChange={(e) => {
-                    RewardValueUpdate(e.target.value)
+                          RewardValueUpdate(e.target.value)
                     }}></input>
                     <div className="equalsSaveValue" onClick={() => {
+
+                        console.log(inputDecisions)
+                        console.log(rewardValue)
+                        console.log(alreadyConditional)
+                        console.log(errorShow)
+
                         if(inputDecisions.length !== 0 && rewardValue !== "" && !alreadyConditional && errorShow.indexOf(true) === -1){
                             const uuid = uuidv4()
                             var array = []
