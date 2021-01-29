@@ -38,10 +38,10 @@ export const InputComponent = (props) => {
                 }
             })
             if(exists){
-                var newArray = props.currentValues.concat(e.target.value)
+                var newArrayYes = props.currentValues.concat(e.target.value)
                 changeGoalExists(true)
                 upddateCorrectLocalValue(e.target.value)
-                props.update(newArray)
+                props.update(newArrayYes)
             }
             else{
                 changeGoalExists(false)

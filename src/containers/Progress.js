@@ -20,7 +20,7 @@ export const Progress = (props) => {
 
     const hoverOver = () => {
         const style = {
-            fontSize: "1.5rem",
+            fontSize: "20px",
             marginLeft: "5rem",
             hover: "pointer",
             color: "red",
@@ -34,7 +34,7 @@ export const Progress = (props) => {
 
    const hoverOut = () => {
     const style = {
-        fontSize: "1.5rem",
+        fontSize: "20px",
         marginLeft: "5rem",
         hover: "pointer",
         color: "black",
@@ -47,16 +47,16 @@ export const Progress = (props) => {
     }
    }
 
-   
     useEffect(() => {
+        if(firstTime === false){
+
+        
         hoverRef.current.addEventListener('mouseover', hoverOver);
         hoverRef.current.addEventListener('mouseout', hoverOut);
         props.removeText()
-    }, [!firstTime])
+        }
+    }, [firstTime])
 
-
-
-   
     return(
         <div>
             <div className="moneyContainer">
@@ -85,7 +85,7 @@ export const Progress = (props) => {
 }
 
 var addGoal = {
-    fontSize: "1.5rem",
+    fontSize: "20px",
     marginLeft: "5rem",
     hover: "pointer",
     color: "black",

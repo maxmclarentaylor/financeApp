@@ -13,7 +13,7 @@ export const ItemComponent = (props) => {
     const [search, updateSearch] = useState("")
     const [searchResults, updateSearchResults] = useState([])
     const [hitAgain, hitAgainUpdate] = useState(true)
-
+    const [name, updateName] = useState(props.name)
     const[highItems, updateHighItems] = useState([])
     const[mediumItems, updateMediumItems] = useState([])
     const[lowItems, updateLowItems] = useState([])
@@ -50,7 +50,7 @@ export const ItemComponent = (props) => {
             updateMediumItems([])
             hitAgainUpdate(false)
          }
-    })
+    },[highItems, mediumItems, lowItems, items.itemsPurchased, hitAgain])
        
     useEffect(() => {
         if(search.length > 2 && over3){
@@ -61,9 +61,9 @@ export const ItemComponent = (props) => {
         else if (search.length < 2){
             updateSearchResults([])
         }
-    },[search.length])
+    },[search, over3])
 
-    console.log(mediumItems)
+
 
     return(
         <div className="itemComponentShape">

@@ -122,7 +122,13 @@ color: red;
 }
 
 .createGoalAwards{
+  margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.pleaseAddInValue{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .goalDiv2{
@@ -189,9 +195,8 @@ color: red;
   margin-right: 0.5rem;
 }
 
-
 .equalsSaveValue{
-  font-size: 20px;
+font-size: 20px;
 margin-left:2rem;
 }
 

@@ -8,7 +8,7 @@ import { removeItemBuyList, updateNeedLevel } from '../reducers/ducks/items/indi
 
 export const PurchasedItemListComponent = (props) => {
 
-    console.log(props)
+
 
      const dispatch = useDispatch()
      const wantLevel = ["High", "Medium", "Low"]

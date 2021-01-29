@@ -24,7 +24,6 @@ export const RewardsOutput = React.memo((props) => {
     },[conditionalsUsedSofar])
   
     useEffect(() => {
-        console.log(currentConditionals)
         updateGoalResults([])
 
     var arrayOfGoalOutputs = []
@@ -135,7 +134,7 @@ export const RewardsOutput = React.memo((props) => {
               
                 if(typeof condValues[0] === "number"){
                     integer = condValues[0]
-                    return <div className="goalTypeName" key={condValues[1]}> {"=" + " " + "reward of" + " " +  "£" + condValues[0].toString()}</div>
+                    return <div className="goalTypeName" key={condValues[1]}> {"= £" + condValues[0].toString()}</div>
                 }
                 else if(condValues === true || condValues === false || condValues === "incomplete"){
                     if(condValues === true){

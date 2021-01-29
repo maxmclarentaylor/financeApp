@@ -61,7 +61,7 @@
 
             }
         },
-        "itemAllId":[["clothes",true], ["holiday",true], ["games",false], ["films",false], ["sports",true], ["books",false], ["music",false]]
+        "itemAllId":[["clothes",false], ["holiday",false], ["games",false], ["films",false], ["sports",false], ["books",false], ["music",false]]
     },
     "money": {
         "moneyById": {

@@ -48,7 +48,7 @@ export const RewardsConditional = (props) => {
                     addInputValue(inputValues.concat(0))
                 }
                 }}>+</div>
-                {noValueMade && <div>Please add in a value or remove error</div>}
+                {noValueMade && <div className="pleaseAddInValue">Please add in a value or remove error</div>}
                 {inputValues.length > 0 && <div className="plus" onClick={() => {
                 const array = inputValues.slice(0, inputValues.length - 1)
                 addInputValue(array)
@@ -71,12 +71,6 @@ export const RewardsConditional = (props) => {
                           RewardValueUpdate(e.target.value)
                     }}></input>
                     <div className="equalsSaveValue" onClick={() => {
-
-                        console.log(inputDecisions)
-                        console.log(rewardValue)
-                        console.log(alreadyConditional)
-                        console.log(errorShow)
-
                         if(inputDecisions.length !== 0 && rewardValue !== "" && !alreadyConditional && errorShow.indexOf(true) === -1){
                             const uuid = uuidv4()
                             var array = []
